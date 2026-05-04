@@ -252,7 +252,7 @@ section {
   max-width: 1200px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
   margin-top: 2rem;
 }
@@ -265,6 +265,9 @@ section {
   border: 1px solid var(--border-light);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .card:hover {
@@ -298,6 +301,7 @@ section {
   color: var(--text-secondary);
   margin-bottom: 1.5rem;
   line-height: 1.7;
+  flex-grow: 1;
 }
 
 .card-tags {
