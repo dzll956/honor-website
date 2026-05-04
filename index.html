@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王者荣耀 - 教学作品集</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
         :root {
             --bg: #f8f9fa;
             --bg-card: #ffffff;
@@ -487,38 +488,70 @@
             </div>
             
             <div class="portfolio-grid">
-                <a href="support.html" style="text-decoration: none; display: block;">
-                    <div class="card fade-in" style="border-top: 4px solid var(--accent);">
-                        <div class="card-icon">🛡️</div>
-                        <h3>辅助意识教学</h3>
-                        <p>从零开始学习辅助位置，掌握视野控制、团战站位、保C技巧等核心技能</p>
-                        <div class="card-tags">
-                            <span class="tag tag-support">辅助</span>
-                            <span class="tag tag-support">意识</span>
-                            <span class="tag tag-support">进阶</span>
-                        </div>
-                        <div class="btn btn-primary">
-                            开始学习 →
-                        </div>
-                    </div>
-                </a>
-
-                <a href="mid.html" style="text-decoration: none; display: block;">
-                    <div class="card fade-in" style="border-top: 4px solid var(--blue);">
-                        <div class="card-icon">⚡</div>
-                        <h3>中路法师教学</h3>
-                        <p>深入理解中路节奏，学习清线技巧、游走支援、团战输出等关键要点</p>
-                        <div class="card-tags">
-                            <span class="tag tag-mid">中路</span>
-                            <span class="tag tag-mid">节奏</span>
-                            <span class="tag tag-mid">法师</span>
-                        </div>
-                        <div class="btn btn-primary" style="background: var(--blue);">
-                            开始学习 →
-                        </div>
-                    </div>
-                </a>
+        <a href="support.html" style="text-decoration: none; display: block;">
+          <div class="card fade-in" style="border-top: 4px solid var(--accent);">
+            <div class="card-icon">🛡️</div>
+            <h3>辅助意识教学</h3>
+            <p>从零开始学习辅助位置，掌握视野控制、团战站位、保C技巧等核心技能</p>
+            <div class="card-tags">
+              <span class="tag tag-support">辅助</span>
+              <span class="tag tag-support">意识</span>
+              <span class="tag tag-support">进阶</span>
             </div>
+            <div class="btn btn-primary">
+              开始学习 →
+            </div>
+          </div>
+        </a>
+
+        <a href="mid.html" style="text-decoration: none; display: block;">
+          <div class="card fade-in" style="border-top: 4px solid var(--blue);">
+            <div class="card-icon">⚡</div>
+            <h3>中路法师教学</h3>
+            <p>深入理解中路节奏，学习清线技巧、游走支援、团战输出等关键要点</p>
+            <div class="card-tags">
+              <span class="tag tag-mid">中路</span>
+              <span class="tag tag-mid">节奏</span>
+              <span class="tag tag-mid">法师</span>
+            </div>
+            <div class="btn btn-primary" style="background: var(--blue);">
+              开始学习 →
+            </div>
+          </div>
+        </a>
+
+        <a href="jungle.html" style="text-decoration: none; display: block;">
+          <div class="card fade-in" style="border-top: 4px solid var(--purple);">
+            <div class="card-icon">🏃</div>
+            <h3>打野节奏教学</h3>
+            <p>掌控全场节奏，学习刷野路线、抓人技巧、控龙节奏等核心玩法</p>
+            <div class="card-tags">
+              <span class="tag" style="background: var(--purple-light); color: var(--purple);">打野</span>
+              <span class="tag" style="background: var(--purple-light); color: var(--purple);">节奏</span>
+              <span class="tag" style="background: var(--purple-light); color: var(--purple);">Carry</span>
+            </div>
+            <div class="btn btn-primary" style="background: var(--purple);">
+              开始学习 →
+            </div>
+          </div>
+        </a>
+
+        <a href="adcarry.html" style="text-decoration: none; display: block;">
+          <div class="card fade-in" style="border-top: 4px solid var(--gold);">
+            <div class="card-icon">🏹</div>
+            <h3>射手输出教学</h3>
+            <p>核心输出担当，学习对线技巧、团战站位、发育节奏等进阶内容</p>
+            <div class="card-tags">
+              <span class="tag" style="background: var(--gold-light); color: var(--gold);">射手</span>
+              <span class="tag" style="background: var(--gold-light); color: var(--gold);">输出</span>
+              <span class="tag" style="background: var(--gold-light); color: var(--gold);">发育</span>
+            </div>
+            <div class="btn btn-primary" style="background: var(--gold);">
+              开始学习 →
+            </div>
+          </div>
+        </a>
+      </div>
         </section>
 
         <section id="about" style="background: var(--bg-section);">
@@ -545,62 +578,6 @@
         ↑
     </button>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        let lastScroll = 0;
-        const nav = document.querySelector('nav');
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            
-            if (currentScroll > 100) {
-                nav.classList.add('scrolled');
-                backToTop.classList.add('visible');
-            } else {
-                nav.classList.remove('scrolled');
-                backToTop.classList.remove('visible');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>

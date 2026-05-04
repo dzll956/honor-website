@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>王者荣耀 - 射手教学</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    :root {
+      --accent: #f39c12;
+      --accent-light: #fef9e7;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+    }
+    
+    .btn-primary:hover {
+      background: #e67e22;
+    }
+    
+    .section-alt {
+      background: var(--bg-section);
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #fef9e7 0%, #fff 50%, #fdf2f2 100%);
+    }
+    
+    .hero-badge {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .tag-adc {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+    
+    .back-to-top {
+      background: var(--accent);
+      box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
+    }
+    
+    .back-to-top:hover {
+      background: #e67e22;
+      box-shadow: 0 8px 30px rgba(243, 156, 18, 0.5);
+    }
+    
+    .tips-grid {
+      max-width: 1000px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .tip-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--accent);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    
+    .tip-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .tip-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    .tip-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .section-number {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--border);
+      margin-bottom: 0.5rem;
+    }
+    
+    .content-grid {
+      max-width: 1000px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .pos-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    
+    .pos-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+    
+    .hero-type {
+      background: var(--gold-light);
+      border-color: var(--gold);
+    }
+    
+    @media (max-width: 768px) {
+      .tips-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      🎮 荣耀<span>教学</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">← 返回首页</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content fade-in">
+        <span class="hero-badge">@归橘落</span>
+        <h1>
+          王者荣耀<br>
+          <span class="highlight">射手教学</span>
+        </h1>
+        <p class="hero-subtitle">稳定输出，Carry全场</p>
+        <div class="hero-cta">
+          <a href="#start" class="btn btn-primary">开始学习</a>
+          <a href="index.html" class="btn btn-secondary">返回作品集</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="section-header fade-in">
+        <div class="section-number">01</div>
+        <h2 class="section-title">射手的核心素养</h2>
+        <p class="section-desc">射手是团队的输出担当</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="card fade-in">
+          <div class="card-icon">🎯</div>
+          <h3>输出第一</h3>
+          <p>保证自己存活，尽可能多的打输出</p>
+          <div class="card-tags">
+            <span class="tag tag-adc">输出</span>
+            <span class="tag tag-adc">生存</span>
+          </div>
+        </div>
+        <div class="card fade-in" style="animation-delay: 0.1s;">
+          <div class="card-icon">💰</div>
+          <h3>经济至上</h3>
+          <p>保证发育第一要务，没经济就没伤害</p>
+          <div class="card-tags">
+            <span class="tag tag-adc">经济</span>
+            <span class="tag tag-adc">发育</span>
+          </div>
+        </div>
+        <div class="card fade-in" style="animation-delay: 0.2s;">
+          <div class="card-icon">⏰</div>
+          <h3>时机把握</h3>
+          <p>知道什么时候该上，什么时候该退</p>
+          <div class="card-tags">
+            <span class="tag tag-adc">时机</span>
+            <span class="tag tag-adc">意识</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="section-header fade-in">
+        <div class="section-number">02</div>
+        <h2 class="section-title">射手类型</h2>
+        <p class="section-desc">选择适合你的射手</p>
+      </div>
+      <div class="content-grid">
+        <div class="pos-card fade-in hero-type">
+          <div class="card-icon">🏹</div>
+          <h3>站桩输出型</h3>
+          <p>代表：后羿、鲁班、黄忠</p>
+          <p style="color: var(--text-secondary);">站撸输出，后期无敌</p>
+          <div class="card-tags">
+            <span class="tag tag-adc">爆发</span>
+            <span class="tag tag-adc">后期</span>
+          </div>
+        </div>
+        <div class="pos-card fade-in" style="animation-delay: 0.1s;">
+          <div class="card-icon">⚡</div>
+          <h3>灵活位移型</h3>
+          <p>代表：公孙离、马可波罗、孙尚香</p>
+          <p style="color: var(--text-secondary);">有位移，秀翻全场</p>
+          <div class="card-tags">
+            <span class="tag tag-adc">灵活</span>
+            <span class="tag tag-adc">秀</span>
+          </div>
+        </div>
+        <div class="pos-card fade-in" style="animation-delay: 0.2s;">
+          <div class="card-icon">🎯</div>
+          <h3>远程消耗型</h3>
+          <p>代表：虞姬、伽罗</p>
+          <p style="color: var(--text-secondary);">射程远，安全输出</p>
+          <div class="card-tags">
+            <span class="tag tag-adc">远程</span>
+            <span class="tag tag-adc">消耗</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-header fade-in">
+        <div class="section-number">03</div>
+        <h2 class="section-title">对线与团战</h2>
+        <p class="section-desc">射手的核心场景</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card fade-in">
+          <div class="tip-title">对线期</div>
+          <div class="tip-text">发育优先，补刀精准，不轻易冒进</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.1s;">
+          <div class="tip-title">打团站位</div>
+          <div class="tip-text">站在后排，跟着辅助后面，不死就有输出</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.2s;">
+          <div class="tip-title">输出目标</div>
+          <div class="tip-text">能打到谁就打谁，别强求切后排</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.3s;">
+          <div class="tip-title">保命技巧</div>
+          <div class="tip-text">净化/闪现留关键控制交了再进场</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="section-header fade-in">
+        <div class="section-number">04</div>
+        <h2 class="section-title">常见错误</h2>
+        <p class="section-desc">避免这些致命失误</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card fade-in" style="border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 站位太靠前</div>
+          <div class="tip-text">第一个被秒，团队直接失去核心输出</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.1s; border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 为了人头追太深</div>
+          <div class="tip-text">追人追到对面塔下被反杀</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.2s; border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 不看小地图</div>
+          <div class="tip-text">不知道对面打野来抓了都不知道</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.3s; border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 不交保命技能</div>
+          <div class="tip-text">闪现净化留着过年，死了才用</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="highlight">祝大家早日上分顺利！🎮</p>
+    <p style="margin-top: 1rem;">王者荣耀射手教学 · @归橘落</p>
+    <div style="margin-top: 2rem;">
+      <a href="index.html" class="btn btn-secondary" style="text-decoration: none; display: inline-flex;">← 返回作品集</a>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

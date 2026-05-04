@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>王者荣耀 - 打野教学</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    :root {
+      --accent: #9b59b6;
+      --accent-light: #f5eef8;
+    }
+    
+    .btn-primary {
+      background: var(--accent);
+    }
+    
+    .btn-primary:hover {
+      background: #8e44ad;
+    }
+    
+    .section-alt {
+      background: var(--bg-section);
+    }
+    
+    .timeline {
+      max-width: 800px;
+      width: 100%;
+      position: relative;
+      padding-left: 3rem;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border-light);
+      transition: transform 0.3s ease;
+    }
+    
+    .timeline-item:hover {
+      transform: translateX(8px);
+    }
+    
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+    
+    .timeline-dot {
+      position: absolute;
+      left: -3rem;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .timeline-item:hover .timeline-dot {
+      transform: scale(1.2);
+      box-shadow: 0 4px 16px rgba(155, 89, 182, 0.4);
+    }
+    
+    .timeline-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    .timeline-desc {
+      color: var(--text-secondary);
+      line-height: 1.8;
+    }
+    
+    .tips-grid {
+      max-width: 1000px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .tip-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      border: 1px solid var(--border-light);
+      border-left: 4px solid var(--accent);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+    
+    .tip-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+    }
+    
+    .tip-title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+    
+    .tip-text {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .section-number {
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--border);
+      margin-bottom: 0.5rem;
+    }
+    
+    .hero {
+      background: linear-gradient(135deg, #f5eef8 0%, #fff 50%, #fff5f5 100%);
+    }
+    
+    .hero-badge {
+      background: var(--accent-light);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    
+    .back-to-top {
+      background: var(--accent);
+      box-shadow: 0 4px 20px rgba(155, 89, 182, 0.4);
+    }
+    
+    .back-to-top:hover {
+      background: #8e44ad;
+      box-shadow: 0 8px 30px rgba(155, 89, 182, 0.5);
+    }
+    
+    .tag-jungle {
+      background: var(--accent-light);
+      color: var(--accent);
+    }
+    
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      width: 100%;
+      margin-top: 2rem;
+    }
+    
+    .path-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+    }
+    
+    .path-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-5px);
+    }
+    
+    .hero-type {
+      background: var(--purple-light);
+      border-color: var(--purple);
+    }
+    
+    @media (max-width: 768px) {
+      .timeline {
+        padding-left: 2rem;
+      }
+      
+      .timeline-dot {
+        left: -2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      🎮 荣耀<span>教学</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">← 返回首页</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content fade-in">
+        <span class="hero-badge">@归橘落</span>
+        <h1>
+          王者荣耀<br>
+          <span class="highlight">打野教学</span>
+        </h1>
+        <p class="hero-subtitle">掌控节奏，Carry全场</p>
+        <div class="hero-cta">
+          <a href="#start" class="btn btn-primary">开始学习</a>
+          <a href="index.html" class="btn btn-secondary">返回作品集</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="section-header fade-in">
+        <div class="section-number">01</div>
+        <h2 class="section-title">打野的核心思维</h2>
+        <p class="section-desc">打野是团队的节奏发动机</p>
+      </div>
+      <div class="portfolio-grid">
+        <div class="card fade-in">
+          <div class="card-icon">🎯</div>
+          <h3>目标明确</h3>
+          <p>知道什么时候该做什么，刷野、抓人、开龙，节奏清晰</p>
+          <div class="card-tags">
+            <span class="tag tag-jungle">节奏</span>
+            <span class="tag tag-jungle">思路</span>
+          </div>
+        </div>
+        <div class="card fade-in" style="animation-delay: 0.1s;">
+          <div class="card-icon">⚡</div>
+          <h3>灵活应变</h3>
+          <p>根据场上情况随时调整策略，不按死一套</p>
+          <div class="card-tags">
+            <span class="tag tag-jungle">灵活</span>
+            <span class="tag tag-jungle">应变</span>
+          </div>
+        </div>
+        <div class="card fade-in" style="animation-delay: 0.2s;">
+          <div class="card-icon">🗺️</div>
+          <h3>地图把控</h3>
+          <p>时刻关注小地图，掌握敌人动向，预判对手位置</p>
+          <div class="card-tags">
+            <span class="tag tag-jungle">视野</span>
+            <span class="tag tag-jungle">意识</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="section-header fade-in">
+        <div class="section-number">02</div>
+        <h2 class="section-title">开局刷野路线</h2>
+        <p class="section-desc">好的开始是成功的一半</p>
+      </div>
+      <div class="timeline fade-in">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-title">红开路线</h3>
+          <p class="timeline-desc">红buff → 三熊 → 蓝buff → 河道蟹 → 抓人。适合需要攻速的打野，快速到4级后抓下路</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-title">蓝开路线</h3>
+          <p class="timeline-desc">蓝buff → 三狼 → 红buff → 河道蟹 → 抓人。适合需要冷却的打野，快速到4级后抓上路或中路</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <h3 class="timeline-title">速3路线</h3>
+          <p class="timeline-desc">buff → 小野 → 另一个buff，快速到3级反蹲，适合强势打野，3级就搞事</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-header fade-in">
+        <div class="section-number">03</div>
+        <h2 class="section-title">打野类型</h2>
+        <p class="section-desc">不同类型的打野玩法不同</p>
+      </div>
+      <div class="path-grid">
+        <div class="path-card fade-in hero-type">
+          <div class="card-icon">⚔️</div>
+          <h3>野核型</h3>
+          <p>代表：澜、镜、暃</p>
+          <p class="text-muted">需要大量经济，吃全队输出，带飞</p>
+          <div class="card-tags">
+            <span class="tag tag-jungle">经济</span>
+            <span class="tag tag-jungle">核心</span>
+          </div>
+        </div>
+        <div class="path-card fade-in" style="animation-delay: 0.1s;">
+          <div class="card-icon">🛡️</div>
+          <h3>蓝领型</h3>
+          <p>代表：赵云、典韦、猪八戒</p>
+          <p class="text-muted">让经济给队友，自己开团抗伤害</p>
+          <div class="card-tags">
+            <span class="tag tag-jungle">团队</span>
+            <span class="tag tag-jungle">蓝领</span>
+          </div>
+        </div>
+        <div class="path-card fade-in" style="animation-delay: 0.2s;">
+          <div class="card-icon">⚡</div>
+          <h3>节奏型</h3>
+          <p>代表：兰陵王、阿轲、云中君</p>
+          <p class="text-muted">不断搞事，反野抓人，带起全场节奏</p>
+          <div class="card-tags">
+            <span class="tag tag-jungle">节奏</span>
+            <span class="tag tag-jungle">入侵</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-alt">
+      <div class="section-header fade-in">
+        <div class="section-number">04</div>
+        <h2 class="section-title">什么时候该做什么</h2>
+        <p class="section-desc">不同时间点的选择</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card fade-in">
+          <div class="tip-title">1-4分钟</div>
+          <div class="tip-text">快速到4级，找机会抓人，优先帮优势路</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.1s;">
+          <div class="tip-title">4-8分钟</div>
+          <div class="tip-text">控龙推塔，建立经济差，入侵对面野区</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.2s;">
+          <div class="tip-title">8-12分钟</div>
+          <div class="tip-text">找机会打团，拿大龙，推高地塔</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.3s;">
+          <div class="tip-title">12分钟后</div>
+          <div class="tip-text">保护C位，一波结束游戏</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-header fade-in">
+        <div class="section-number">05</div>
+        <h2 class="section-title">常见错误</h2>
+        <p class="section-desc">避免这些坑</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card fade-in" style="border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 只刷野不抓人</div>
+          <div class="tip-text">刷完野就走，完全不管队友，节奏全失</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.1s; border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 无脑入侵被反杀</div>
+          <div class="tip-text">不看队友位置，一个人冲到对面野区送</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.2s; border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 不控龙</div>
+          <div class="tip-text">龙刷了完全不管，白白给对面</div>
+        </div>
+        <div class="tip-card fade-in" style="animation-delay: 0.3s; border-left-color: #e74c3c;">
+          <div class="tip-title">❌ 经济落后还抢队友线</div>
+          <div class="tip-text">自己崩了还吃队友经济，让队友更难受</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p class="highlight">祝大家早日上分顺利！🎮</p>
+    <p style="margin-top: 1rem;">王者荣耀打野教学 · @归橘落</p>
+    <div style="margin-top: 2rem;">
+      <a href="index.html" class="btn btn-secondary" style="text-decoration: none; display: inline-flex;">← 返回作品集</a>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
