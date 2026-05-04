@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀 - 中路法师教学</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8f9fa;
+            --bg-card: #ffffff;
+            --bg-section: #f0f2f5;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a5a;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --accent: #3498db;
+            --accent-light: #ebf5fb;
+            --blue: #3498db;
+            --blue-light: #ebf5fb;
+            --green: #27ae60;
+            --green-light: #eafaf1;
+            --gold: #f39c12;
+            --gold-light: #fef9e7;
+            --purple: #9b59b6;
+            --purple-light: #f5eef8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.8;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            transition: transform 0.3s ease;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 900;
+            color: var(--text);
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        main {
+            position: relative;
+            z-index: 10;
+        }
+
+        section {
+            min-height: auto;
+            padding: 5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+            background: linear-gradient(135deg, #f0f7ff 0%, #fff 50%, #fff5f5 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--accent-light);
+            border: 1px solid var(--accent);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--border);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .content-grid {
+            max-width: 1000px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 10px 20px rgba(0, 0, 0, 0.04);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 8px 16px rgba(0, 0, 0, 0.06);
+            border-color: var(--border);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .card li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .card li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .timeline {
+            max-width: 800px;
+            width: 100%;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--border);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -3rem;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .timeline-desc {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .tips-grid {
+            max-width: 1000px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .tip-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .tip-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .tip-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .tip-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .hero-type {
+            background: var(--blue-light);
+            border-color: var(--blue);
+        }
+
+        .hero-type .card-icon {
+            color: var(--blue);
+        }
+
+        .section-alt {
+            background: var(--bg-section);
+        }
+
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer .highlight {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-dot {
+                left: -2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            🎮 荣耀<span>教学</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">← 返回首页</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content fade-in">
+                <span class="hero-badge">@归橘落</span>
+                <h1>中路<span class="highlight">法师</span>教学</h1>
+                <p class="hero-subtitle">掌控节奏，Carry全场</p>
+                <div class="hero-cta">
+                    <a href="#start" class="btn btn-primary">
+                        开始学习
+                    </a>
+                    <a href="index.html" class="btn btn-secondary">
+                        返回作品集
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="start">
+            <div class="section-header fade-in">
+                <div class="section-number">01</div>
+                <h2 class="section-title">基础认知</h2>
+                <p class="section-desc">理解中路的核心价值</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="card fade-in">
+                    <div class="card-icon">⚡</div>
+                    <h3>中路定位</h3>
+                    <ul>
+                        <li>团队核心输出位</li>
+                        <li>节奏发起者</li>
+                        <li>游走支援中心</li>
+                        <li>伤害输出担当</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="animation-delay: 0.1s;">
+                    <div class="card-icon">🎯</div>
+                    <h3>核心职责</h3>
+                    <ul>
+                        <li>快速清线支援边路</li>
+                        <li>控制河道视野</li>
+                        <li>团战输出最大化</li>
+                        <li>配合打野入侵</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="animation-delay: 0.2s;">
+                    <div class="card-icon">🏆</div>
+                    <h3>目标意识</h3>
+                    <ul>
+                        <li>清兵第一优先级</li>
+                        <li>支援前确保塔安全</li>
+                        <li>击杀不是唯一目标</li>
+                        <li>节奏比人头重要</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-alt">
+            <div class="section-header fade-in">
+                <div class="section-number">02</div>
+                <h2 class="section-title">清线技巧</h2>
+                <p class="section-desc">中路的生命线</p>
+            </div>
+
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">前期（1-4级）</h3>
+                    <p class="timeline-desc">
+                        安全第一！快速清线但别深追。第一波兵线决定等级优势，优先用技能快速清兵，然后观察边路情况决定是否支援。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">中期（5-10级）</h3>
+                    <p class="timeline-desc">
+                        游走期！清线后立即支援。优先支援有控制的边路，或者配合打野入侵野区。清线速度决定支援效率。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">后期（11级+）</h3>
+                    <p class="timeline-desc">
+                        抱团期！别单独清线。跟队友一起，确保安全的情况下清兵。后期掉点可能直接输掉比赛。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header fade-in">
+                <div class="section-number">03</div>
+                <h2 class="section-title">英雄分类</h2>
+                <p class="section-desc">选择适合你的法师</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="card fade-in hero-type">
+                    <div class="card-icon">🔥</div>
+                    <h3>爆发型法师</h3>
+                    <ul>
+                        <li>代表：不知火舞、上官婉儿</li>
+                        <li>特点：一套秒人</li>
+                        <li>适合：喜欢单杀玩家</li>
+                        <li>技巧：寻找入场时机</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="animation-delay: 0.1s;">
+                    <div class="card-icon">🌊</div>
+                    <h3>持续输出型</h3>
+                    <ul>
+                        <li>代表：嬴政、干将莫邪</li>
+                        <li>特点：远程消耗poke</li>
+                        <li>适合：喜欢安全输出</li>
+                        <li>技巧：保持距离输出</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="animation-delay: 0.2s;">
+                    <div class="card-icon">❄️</div>
+                    <h3>控制型法师</h3>
+                    <ul>
+                        <li>代表：王昭君、甄姬</li>
+                        <li>特点：团控利器</li>
+                        <li>适合：喜欢配合队友</li>
+                        <li>技巧：预判走位放技能</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-alt">
+            <div class="section-header fade-in">
+                <div class="section-number">04</div>
+                <h2 class="section-title">游走支援</h2>
+                <p class="section-desc">中路的必修课</p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card fade-in">
+                    <div class="tip-title">支援前确认</div>
+                    <div class="tip-text">先清线再游走，确保中塔安全，不然后果很严重</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="tip-title">选择支援路线</div>
+                    <div class="tip-text">优先走河道草丛，别走河道中间，容易被蹲</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="tip-title">支援时机判断</div>
+                    <div class="tip-text">看哪边有控制，哪边打野在，就优先支援哪边</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="tip-title">支援失败怎么办</div>
+                    <div class="tip-text">立刻回中路清兵，别贪恋战场，止损最重要</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header fade-in">
+                <div class="section-number">05</div>
+                <h2 class="section-title">团战技巧</h2>
+                <p class="section-desc">决定胜负的关键</p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card fade-in">
+                    <div class="tip-title">站位原则</div>
+                    <div class="tip-text">站在坦克后面，别第一个冲，活着才有输出</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="tip-title">目标选择</div>
+                    <div class="tip-text">优先打能摸到的人，别强求切后排，输出最大化就行</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="tip-title">技能释放</div>
+                    <div class="tip-text">别急着交技能，等队友先开团，找到最佳时机再放</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.3s;">
+                    <div class="tip-title">撤退判断</div>
+                    <div class="tip-text">打不过就撤，别贪输出，活着等下一波团战</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.4s;">
+                    <div class="tip-title">经济意识</div>
+                    <div class="tip-text">确保自己经济不落后，没经济的法师没威胁</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.5s;">
+                    <div class="tip-title">金身使用</div>
+                    <div class="tip-text">别等快死了才开，预判关键技能提前开金身</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-alt">
+            <div class="section-header fade-in">
+                <div class="section-number">06</div>
+                <h2 class="section-title">进阶技巧</h2>
+                <p class="section-desc">成为高手的秘诀</p>
+            </div>
+
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">卡视野</h3>
+                    <p class="timeline-desc">
+                        利用草丛卡视野，让敌人看不到你的技能释放，增加命中率和突然性。在草丛中等待敌人出现。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">预判走位</h3>
+                    <p class="timeline-desc">
+                        观察敌人习惯的移动路线，提前释放技能。比如敌人喜欢向左躲，那就往左边预判。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">控制蓝Buff</h3>
+                    <p class="timeline-desc">
+                        蓝Buff对法师很重要！跟打野沟通好，确保自己能拿到蓝Buff，特别是持续输出型法师。
+                    </p>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <h3 class="timeline-title">出装调整</h3>
+                    <p class="timeline-desc">
+                        根据对面阵容调整出装！控制多出抵抗之靴，回血多出梦魇之牙，没人保护就先出金身。
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header fade-in">
+                <div class="section-number">07</div>
+                <h2 class="section-title">常见失误</h2>
+                <p class="section-desc">避免这些坑</p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card fade-in" style="border-left-color: #e74c3c;">
+                    <div class="tip-title">❌ 清兵太慢</div>
+                    <div class="tip-text">技能留着不用，导致清线慢，支援晚，节奏全丢</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.1s; border-left-color: #e74c3c;">
+                    <div class="tip-title">❌ 无脑支援</div>
+                    <div class="tip-text">兵线还没清就跑去支援，结果中塔没了，支援也没成功</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.2s; border-left-color: #e74c3c;">
+                    <div class="tip-title">❌ 站位太靠前</div>
+                    <div class="tip-text">团战第一个冲上去，被瞬秒，团队直接少了核心输出</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.3s; border-left-color: #e74c3c;">
+                    <div class="tip-title">❌ 贪人头</div>
+                    <div class="tip-text">为了人头追太深，结果被反杀，还赔了节奏</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.4s; border-left-color: #e74c3c;">
+                    <div class="tip-title">❌ 技能乱放</div>
+                    <div class="tip-text">一见面就把技能全交了，结果真正需要的时候没技能可用</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.5s; border-left-color: #e74c3c;">
+                    <div class="tip-title">❌ 不看小地图</div>
+                    <div class="tip-text">不看小地图，被蹲了无数次还不长记性</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-alt">
+            <div class="section-header fade-in">
+                <div class="section-number">08</div>
+                <h2 class="section-title">练习建议</h2>
+                <p class="section-desc">每天进步一点点</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="card fade-in">
+                    <div class="card-icon">🎮</div>
+                    <h3>每日必练</h3>
+                    <ul>
+                        <li>3局中路实战</li>
+                        <li>练习技能命中率</li>
+                        <li>观察小地图习惯</li>
+                        <li>复盘一局比赛</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="animation-delay: 0.1s;">
+                    <div class="card-icon">📚</div>
+                    <h3>学习内容</h3>
+                    <ul>
+                        <li>看职业比赛中路视角</li>
+                        <li>学习主播的游走时机</li>
+                        <li>研究英雄技能机制</li>
+                        <li>关注版本强势英雄</li>
+                    </ul>
+                </div>
+
+                <div class="card fade-in" style="animation-delay: 0.2s;">
+                    <div class="card-icon">🎯</div>
+                    <h3>目标设定</h3>
+                    <ul>
+                        <li>第一周：掌握清线节奏</li>
+                        <li>第二周：学会支援判断</li>
+                        <li>第三周：提高技能命中</li>
+                        <li>第四周：团战处理进阶</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="section-header fade-in">
+                <div class="section-number">09</div>
+                <h2 class="section-title">心态建设</h2>
+                <p class="section-desc">稳定的心态是胜利的一半</p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card fade-in" style="border-left-color: #27ae60;">
+                    <div class="tip-title">✅ 接受失误</div>
+                    <div class="tip-text">谁都有失误的时候，别因为一次失误影响后面的发挥</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.1s; border-left-color: #27ae60;">
+                    <div class="tip-title">✅ 别骂队友</div>
+                    <div class="tip-text">队友菜的时候，想想自己也有菜的时候，鼓励比指责有用</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.2s; border-left-color: #27ae60;">
+                    <div class="tip-title">✅ 保持冷静</div>
+                    <div class="tip-text">被蹲被反杀都别慌，冷静下来找机会翻盘</div>
+                </div>
+
+                <div class="tip-card fade-in" style="animation-delay: 0.3s; border-left-color: #27ae60;">
+                    <div class="tip-title">✅ 享受游戏</div>
+                    <div class="tip-text">游戏而已，开心最重要！输赢是次要的</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p class="highlight">祝大家早日上分顺利！🎮</p>
+        <p style="margin-top: 1rem;">王者荣耀中路法师教学 · @归橘落</p>
+        <div style="margin-top: 2rem;">
+            <a href="index.html" class="btn btn-secondary" style="text-decoration: none; display: inline-flex;">
+                ← 返回作品集
+            </a>
+        </div>
+        <div style="margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;">
+            <div class="card fade-in" style="background: var(--text); border: 2px solid var(--purple);">
+                <div class="card-icon" style="color: white;">🥬</div>
+                <h3 style="color: var(--purple);">我要偷你菜</h3>
+                <p style="color: var(--text-muted); margin-top: 0.5rem;">别问为什么，问就是想偷</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
