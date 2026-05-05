@@ -4,457 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王者荣耀 - 教学作品集</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css">
-  <style>
-        :root {
-            --bg: #f8f9fa;
-            --bg-card: #ffffff;
-            --bg-section: #f0f2f5;
-            --text: #1a1a2e;
-            --text-secondary: #4a4a5a;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --border-light: #f3f4f6;
-            --accent: #e74c3c;
-            --accent-light: #fdf2f2;
-            --blue: #3498db;
-            --blue-light: #ebf5fb;
-            --green: #27ae60;
-            --green-light: #eafaf1;
-            --gold: #f39c12;
-            --gold-light: #fef9e7;
-            --purple: #9b59b6;
-            --purple-light: #f5eef8;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            overflow-x: hidden;
-            line-height: 1.8;
-            opacity: 0;
-            animation: pageLoad 0.5s ease forwards;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--text);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo:active {
-            transform: scale(0.95);
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.2s ease;
-            position: relative;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-
-        .nav-links a:active {
-            transform: translateY(0);
-        }
-
-        main {
-            position: relative;
-            z-index: 10;
-        }
-
-        section {
-            min-height: auto;
-            padding: 5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero {
-            position: relative;
-            text-align: center;
-            background: linear-gradient(135deg, #fff5f5 0%, #fff 50%, #f0f7ff 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--accent-light);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .hero h1 .highlight {
-            color: var(--accent);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn:active {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: #c0392b;
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--text);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .portfolio-grid {
-            max-width: 1200px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02), 0 10px 20px rgba(0, 0, 0, 0.04);
-            border: 1px solid var(--border-light);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12), 0 15px 30px rgba(0, 0, 0, 0.08);
-            border-color: var(--accent);
-        }
-
-        .card:active {
-            transform: translateY(-6px) scale(0.98);
-        }
-
-        .card-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            transition: transform 0.4s ease;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.75rem;
-            color: var(--text);
-        }
-
-        .card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .card-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 0.25rem 0.75rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            transition: transform 0.2s ease;
-        }
-
-        .tag:hover {
-            transform: scale(1.05);
-        }
-
-        .tag-support {
-            background: var(--accent-light);
-            color: var(--accent);
-        }
-
-        .tag-mid {
-            background: var(--blue-light);
-            color: var(--blue);
-        }
-
-        footer {
-            background: var(--text);
-            color: white;
-            padding: 3rem 2rem;
-            text-align: center;
-        }
-
-        footer .highlight {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background: #c0392b;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(231, 76, 60, 0.5);
-        }
-
-        .back-to-top:active {
-            transform: translateY(0);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pageLoad {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .back-to-top {
-                bottom: 1.5rem;
-                right: 1.5rem;
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <nav>
@@ -466,7 +17,18 @@
             <li><a href="agent.html">🤖 Agent</a></li>
             <li><a href="#about">关于</a></li>
         </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="菜单">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#portfolio">作品集</a>
+        <a href="agent.html">🤖 Agent</a>
+        <a href="#about">关于</a>
+    </div>
 
     <main>
         <section class="hero">
@@ -487,72 +49,72 @@
                 <h2 class="section-title">教学作品集</h2>
                 <p class="section-desc">选择你需要的位置攻略</p>
             </div>
-            
+
             <div class="portfolio-grid">
-        <a href="support.html" style="text-decoration: none; display: block;">
-          <div class="card fade-in" style="border-top: 4px solid var(--accent);">
-            <div class="card-icon">🛡️</div>
-            <h3>辅助意识教学</h3>
-            <p>从零开始学习辅助位置，掌握视野控制、团战站位、保C技巧等核心技能</p>
-            <div class="card-tags">
-              <span class="tag tag-support">辅助</span>
-              <span class="tag tag-support">意识</span>
-              <span class="tag tag-support">进阶</span>
-            </div>
-            <div class="btn btn-primary">
-              开始学习 →
-            </div>
-          </div>
-        </a>
+                <a href="support.html" style="text-decoration: none; display: block;">
+                    <div class="card fade-in" style="border-top: 4px solid var(--accent);">
+                        <div class="card-icon">🛡️</div>
+                        <h3>辅助意识教学</h3>
+                        <p>从零开始学习辅助位置，掌握视野控制、团战站位、保C技巧等核心技能</p>
+                        <div class="card-tags">
+                            <span class="tag tag-support">辅助</span>
+                            <span class="tag tag-support">意识</span>
+                            <span class="tag tag-support">进阶</span>
+                        </div>
+                        <div class="btn btn-primary">
+                            开始学习 →
+                        </div>
+                    </div>
+                </a>
 
-        <a href="mid.html" style="text-decoration: none; display: block;">
-          <div class="card fade-in" style="border-top: 4px solid var(--blue);">
-            <div class="card-icon">⚡</div>
-            <h3>中路法师教学</h3>
-            <p>深入理解中路节奏，学习清线技巧、游走支援、团战输出等关键要点</p>
-            <div class="card-tags">
-              <span class="tag tag-mid">中路</span>
-              <span class="tag tag-mid">节奏</span>
-              <span class="tag tag-mid">法师</span>
-            </div>
-            <div class="btn btn-primary" style="background: var(--blue);">
-              开始学习 →
-            </div>
-          </div>
-        </a>
+                <a href="mid.html" style="text-decoration: none; display: block;">
+                    <div class="card fade-in" style="border-top: 4px solid var(--blue);">
+                        <div class="card-icon">⚡</div>
+                        <h3>中路法师教学</h3>
+                        <p>深入理解中路节奏，学习清线技巧、游走支援、团战输出等关键要点</p>
+                        <div class="card-tags">
+                            <span class="tag tag-mid">中路</span>
+                            <span class="tag tag-mid">节奏</span>
+                            <span class="tag tag-mid">法师</span>
+                        </div>
+                        <div class="btn btn-primary" style="background: var(--blue);">
+                            开始学习 →
+                        </div>
+                    </div>
+                </a>
 
-        <a href="jungle.html" style="text-decoration: none; display: block;">
-          <div class="card fade-in" style="border-top: 4px solid var(--purple);">
-            <div class="card-icon">🏃</div>
-            <h3>打野节奏教学</h3>
-            <p>掌控全场节奏，学习刷野路线、抓人技巧、控龙节奏等核心玩法</p>
-            <div class="card-tags">
-              <span class="tag" style="background: var(--purple-light); color: var(--purple);">打野</span>
-              <span class="tag" style="background: var(--purple-light); color: var(--purple);">节奏</span>
-              <span class="tag" style="background: var(--purple-light); color: var(--purple);">Carry</span>
-            </div>
-            <div class="btn btn-primary" style="background: var(--purple);">
-              开始学习 →
-            </div>
-          </div>
-        </a>
+                <a href="jungle.html" style="text-decoration: none; display: block;">
+                    <div class="card fade-in" style="border-top: 4px solid var(--purple);">
+                        <div class="card-icon">🏃</div>
+                        <h3>打野节奏教学</h3>
+                        <p>掌控全场节奏，学习刷野路线、抓人技巧、控龙节奏等核心玩法</p>
+                        <div class="card-tags">
+                            <span class="tag" style="background: var(--purple-light); color: var(--purple);">打野</span>
+                            <span class="tag" style="background: var(--purple-light); color: var(--purple);">节奏</span>
+                            <span class="tag" style="background: var(--purple-light); color: var(--purple);">Carry</span>
+                        </div>
+                        <div class="btn btn-primary" style="background: var(--purple);">
+                            开始学习 →
+                        </div>
+                    </div>
+                </a>
 
-        <a href="adcarry.html" style="text-decoration: none; display: block;">
-          <div class="card fade-in" style="border-top: 4px solid var(--gold);">
-            <div class="card-icon">🏹</div>
-            <h3>射手输出教学</h3>
-            <p>核心输出担当，学习对线技巧、团战站位、发育节奏等进阶内容</p>
-            <div class="card-tags">
-              <span class="tag" style="background: var(--gold-light); color: var(--gold);">射手</span>
-              <span class="tag" style="background: var(--gold-light); color: var(--gold);">输出</span>
-              <span class="tag" style="background: var(--gold-light); color: var(--gold);">发育</span>
+                <a href="adcarry.html" style="text-decoration: none; display: block;">
+                    <div class="card fade-in" style="border-top: 4px solid var(--gold);">
+                        <div class="card-icon">🏹</div>
+                        <h3>射手输出教学</h3>
+                        <p>核心输出担当，学习对线技巧、团战站位、发育节奏等进阶内容</p>
+                        <div class="card-tags">
+                            <span class="tag" style="background: var(--gold-light); color: var(--gold);">射手</span>
+                            <span class="tag" style="background: var(--gold-light); color: var(--gold);">输出</span>
+                            <span class="tag" style="background: var(--gold-light); color: var(--gold);">发育</span>
+                        </div>
+                        <div class="btn btn-primary" style="background: var(--gold);">
+                            开始学习 →
+                        </div>
+                    </div>
+                </a>
             </div>
-            <div class="btn btn-primary" style="background: var(--gold);">
-              开始学习 →
-            </div>
-          </div>
-        </a>
-      </div>
         </section>
 
         <section id="about" style="background: var(--bg-section);">

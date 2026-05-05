@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
   let lastScroll = 0;
   const nav = document.querySelector('nav');
   const backToTop = document.getElementById('backToTop');
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const mobileNav = document.getElementById('mobileNav');
 
   window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
@@ -59,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth',
             block: 'start'
           });
+          closeMobileMenu();
         }
       }
     });
@@ -72,6 +75,26 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         window.location.href = 'index.html';
       }
+    });
+  }
+
+  function toggleMobileMenu() {
+    mobileMenuBtn.classList.toggle('active');
+    mobileNav.classList.toggle('active');
+    document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+  }
+
+  function closeMobileMenu() {
+    mobileMenuBtn.classList.remove('active');
+    mobileNav.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (mobileMenuBtn && mobileNav) {
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
     });
   }
 });

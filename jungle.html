@@ -5,1659 +5,648 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王者荣耀 - 打野教学</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg: #f8f9fa;
-            --bg-card: #ffffff;
-            --bg-section: #f0f2f5;
-            --text: #1a1a2e;
-            --text-secondary: #4a4a5a;
-            --text-muted: #6b7280;
-            --border: #e5e7eb;
-            --border-light: #f3f4f6;
-            --accent: #9b59b6;
-            --accent-light: #f5eef8;
-            --blue: #3498db;
-            --blue-light: #ebf5fb;
-            --green: #27ae60;
-            --green-light: #eafaf1;
-            --gold: #f39c12;
-            --gold-light: #fef9e7;
-            --purple: #9b59b6;
-            --purple-light: #f5eef8;
-        }
+    <link rel="stylesheet" href="css/styles.css">
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.8;
-            opacity: 0;
-            animation: pageLoad 0.5s ease forwards;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            will-change: transform;
-        }
-
-        nav.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .logo {
-            font-size: 1.3rem;
-            font-weight: 900;
-            color: var(--text);
-            cursor: pointer;
-            transition: transform 0.2s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .logo:active {
-            transform: scale(0.95);
-        }
-
-        .logo span {
-            color: var(--accent);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: color 0.3s ease, transform 0.2s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover:after {
-            width: 100%;
-        }
-
-        .nav-links a:after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:active {
-            transform: translateY(0);
-        }
-
-        main {
-            position: relative;
-            z-index: 10;
-            padding-top: 60px;
-        }
-
-        section {
-            min-height: auto;
-            padding: 5rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero {
-            position: relative;
-            text-align: center;
-            background: linear-gradient(135deg, #f5eef8 0%, #fff 50%, #fff5f5 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 800px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: var(--accent-light);
-            border: 1px solid var(--accent);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            color: var(--accent);
-            margin-bottom: 2rem;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            color: var(--text);
-        }
-
-        .hero h1 .highlight {
-            color: var(--accent);
-        }
-
-        .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            user-select: none;
-            -webkit-user-select: none;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn:active {
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            background: #8e44ad;
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--text);
-            border: 2px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-number {
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--border);
-            margin-bottom: 0.5rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .section-desc {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
-
-        .section-intro {
-            max-width: 800px;
-            text-align: center;
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem 2rem;
-            background: var(--bg-card);
-            border-radius: 12px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.8rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            border-color: var(--accent);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .card-detail {
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .card-detail p {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .timeline {
-            max-width: 800px;
-            width: 100%;
-            position: relative;
-            padding-left: 3rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: var(--border);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border-light);
-            transition: transform 0.3s ease;
-        }
-
-        .timeline-item:hover {
-            transform: translateX(8px);
-        }
-
-        .timeline-item:last-child {
-            border-bottom: none;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: -3rem;
-            width: 20px;
-            height: 20px;
-            background: var(--accent);
-            border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .timeline-item:hover .timeline-dot {
-            transform: scale(1.2);
-            box-shadow: 0 4px 16px rgba(155, 89, 182, 0.4);
-        }
-
-        .timeline-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .timeline-desc {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        .tips-grid {
-            max-width: 1000px;
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .tip-card {
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-            border: 1px solid var(--border-light);
-            border-left: 4px solid var(--accent);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-
-        .tip-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
-        }
-
-        .tip-card:active {
-            transform: translateY(-3px) scale(0.98);
-        }
-
-        .tip-title {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .tip-text {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .path-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            width: 100%;
-            margin-top: 2rem;
-        }
-
-        .path-card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .path-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .hero-type {
-            background: var(--purple-light);
-            border-color: var(--purple);
-        }
-
-        .section-alt {
-            background: var(--bg-section);
-        }
-
-        .tip-box {
-            background: var(--gold-light);
-            border: 1px solid var(--gold);
-            border-radius: 12px;
-            padding: 1.5rem 2rem;
-            margin-top: 2rem;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .tip-box h4 {
-            color: var(--gold);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .tip-box ul {
-            list-style: none;
-        }
-
-        .tip-box li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .tip-box li::before {
-            content: '▸';
-            color: var(--gold);
-            font-weight: bold;
-        }
-
-        .case-study {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .case-study h4 {
-            color: var(--blue);
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .case-study p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        .case-study .scenario {
-            background: var(--blue-light);
-            border-left: 3px solid var(--blue);
-            padding: 1rem;
-            margin: 1rem 0;
-            border-radius: 0 10px 10px 0;
-        }
-
-        .case-study .action {
-            color: var(--green);
-            font-weight: 600;
-        }
-
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        .comparison-card {
-            padding: 2rem;
-            border-radius: 16px;
-            border: 2px solid;
-            background: var(--bg-card);
-        }
-
-        .comparison-card.good {
-            border-color: var(--green);
-        }
-
-        .comparison-card.bad {
-            border-color: var(--accent);
-        }
-
-        .comparison-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .comparison-card.good h3 {
-            color: var(--green);
-        }
-
-        .comparison-card.bad h3 {
-            color: var(--accent);
-        }
-
-        .comparison-card ul {
-            list-style: none;
-        }
-
-        .comparison-card li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-light);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-        }
-
-        .comparison-card li:last-child {
-            border-bottom: none;
-        }
-
-        .warning-box {
-            background: var(--accent-light);
-            border: 1px solid var(--accent);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 2rem;
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .warning-box h4 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .warning-box ul {
-            list-style: none;
-        }
-
-        .warning-box li {
-            padding: 0.5rem 0;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .warning-box li::before {
-            content: '⚠';
-            color: var(--accent);
-        }
-
-        .mistakes-list {
-            max-width: 900px;
-            width: 100%;
-        }
-
-        .mistake-item {
-            display: flex;
-            align-items: stretch;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid var(--border);
-        }
-
-        .mistake-text {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            background: var(--accent-light);
-            border-radius: 10px;
-            border-left: 3px solid var(--accent);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .mistake-text p {
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        .mistake-explain {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .mistake-arrow {
-            font-size: 1.5rem;
-            color: var(--border);
-            display: flex;
-            align-items: center;
-        }
-
-        .fix-text {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            background: var(--green-light);
-            border-radius: 10px;
-            border-left: 3px solid var(--green);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .fix-text p {
-            color: var(--green);
-            font-weight: 500;
-        }
-
-        .fix-detail {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-        }
-
-        .flow-diagram {
-            max-width: 800px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .flow-box {
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem 2rem;
-            background: var(--bg-card);
-            border-radius: 10px;
-            margin: 0.5rem;
-            border: 1px solid var(--border);
-            font-weight: 500;
-        }
-
-        .flow-arrow {
-            color: var(--text-muted);
-            font-size: 1.5rem;
-        }
-
-        .progress-section {
-            max-width: 800px;
-            width: 100%;
-        }
-
-        .progress-stage {
-            display: flex;
-            align-items: stretch;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .progress-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            flex-shrink: 0;
-        }
-
-        .progress-stage:nth-child(1) .progress-icon {
-            background: var(--bg-section);
-        }
-
-        .progress-stage:nth-child(2) .progress-icon {
-            background: var(--blue-light);
-        }
-
-        .progress-stage:nth-child(3) .progress-icon {
-            background: var(--accent-light);
-        }
-
-        .progress-stage:nth-child(4) .progress-icon {
-            background: var(--gold-light);
-        }
-
-        .progress-content h4 {
-            color: var(--text);
-            margin-bottom: 0.3rem;
-        }
-
-        .progress-content p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .progress-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .progress-tag {
-            padding: 0.25rem 0.75rem;
-            background: var(--bg-section);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            max-width: 1000px;
-            width: 100%;
-        }
-
-        .summary-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            background: var(--bg-card);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid var(--border);
-        }
-
-        .summary-item:hover {
-            transform: translateX(6px);
-            border-color: var(--accent);
-        }
-
-        .summary-icon {
-            font-size: 2rem;
-        }
-
-        .summary-text {
-            font-size: 1.1rem;
-            color: var(--text);
-        }
-
-        .summary-text .highlight {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        footer {
-            text-align: center;
-            padding: 3rem;
-            background: var(--text);
-            color: white;
-        }
-
-        footer .highlight {
-            color: var(--accent);
-            font-weight: 700;
-        }
-
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            z-index: 999;
-            box-shadow: 0 4px 20px rgba(155, 89, 182, 0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            will-change: transform, opacity;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .back-to-top:hover {
-            background: #8e44ad;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(155, 89, 182, 0.5);
-        }
-
-        .back-to-top:active {
-            transform: translateY(0);
-        }
-
-        .tag-jungle {
-            background: var(--accent-light);
-            color: var(--accent);
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            will-change: transform, opacity;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pageLoad {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-        }
-
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .hero-cta {
-                flex-direction: column;
-            }
-
-            .timeline {
-                padding-left: 2rem;
-            }
-
-            .timeline-dot {
-                left: -2rem;
-            }
-
-            .comparison {
-                grid-template-columns: 1fr;
-            }
-
-            .mistake-item {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .mistake-arrow {
-                transform: rotate(90deg);
-            }
-
-            .back-to-top {
-                bottom: 1.5rem;
-                right: 1.5rem;
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-
-            section {
-                padding: 3rem 1.5rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <nav>
         <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-            🎮 荣耀<span>教学</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">← 返回首页</a></li>
-        </ul>
+        🎮 荣耀<span>教学</span>
+    </div>
+    <ul class="nav-links">
+        <li><a href="index.html">← 返回首页</a></li>
+    </ul>
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="菜单">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
     </nav>
 
+    <div class="mobile-nav" id="mobileNav">
+    <a href="index.html">← 返回首页</a>
+    </div>
+
     <main>
-        <section class="hero">
-            <div class="hero-content fade-in">
-                <span class="hero-badge">@归橘落</span>
-                <h1>
-                    王者荣耀<br>
-                    <span class="highlight">打野教学</span>
-                </h1>
-                <p class="hero-subtitle">掌控节奏，Carry全场 · 打野是团队的核心引擎</p>
-                <div class="hero-cta">
-                    <a href="#core" class="btn btn-primary">开始学习</a>
-                    <a href="index.html" class="btn btn-secondary">返回作品集</a>
-                </div>
+    <section class="hero hero-jungle">
+        <div class="hero-content fade-in">
+            <span class="hero-badge badge-jungle">@归橘落</span>
+            <h1>
+                王者荣耀<br>
+                <span class="highlight">打野教学</span>
+            </h1>
+            <p class="hero-subtitle">掌控节奏，Carry全场 · 打野是团队的核心引擎</p>
+            <div class="hero-cta">
+                <a href="#core" class="btn btn-primary btn-jungle">开始学习</a>
+                <a href="index.html" class="btn btn-secondary">返回作品集</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="core">
-            <div class="section-header fade-in">
-                <div class="section-number">01</div>
-                <h2 class="section-title">打野到底<span style="color: var(--accent);">该干嘛</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                打野是整个团队的节奏发动机，俗称"打野是爹"。你不是在刷野，你是在掌控整场比赛的走向。一个好的打野，能把队友从青铜带到王者；一个坑的打野，能把三个队友气到挂机。
-            </p>
-            <div class="card-grid">
-                <div class="card fade-in">
-                    <div class="card-icon">🎯</div>
-                    <h3>掌控节奏</h3>
-                    <p>知道什么时候该刷野、什么时候该抓人、什么时候该开龙</p>
-                    <div class="card-detail">
-                        <p>节奏是关键！不是刷完野区就没事了，你要带着队友搞事情。比如你刷完红区，看上路压线了，那就去抓一波；中路有线权，就去入侵野区。节奏在你手里，不是等队友喊你。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">⚡</div>
-                    <h3>带起节奏</h3>
-                    <p>主动找机会，不是等机会来，是你去创造机会</p>
-                    <div class="card-detail">
-                        <p>别等着队友喊"打野来抓人"，你要自己判断什么时候该抓。比如对面射手压线太深了，这就是机会；比如对面打野在下半野区，你就可以去上路搞事情。主动出击才能掌控比赛。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">🗺️</div>
-                    <h3>地图意识</h3>
-                    <p>时刻关注小地图，知道对面在哪，你才好安排行动</p>
-                    <div class="card-detail">
-                        <p>小地图是打野的命根子！看到对面打野在中路冒头，说明他在上半野区；看到对面射手突然往后走，可能是有人来抓了。多看小地图，才能预判对手的动向，先发制人。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">🐉</div>
-                    <h3>控龙大师</h3>
-                    <p>龙是节奏点，也是经济来源，打野必须会控龙</p>
-                    <div class="card-detail">
-                        <p>龙坑是大节奏！不管是主宰还是暴君，打野都要把握好时机。最好是在推完线、队友都有时间的时候开龙。别一个人偷偷打，万一对面来抢，你可能就交代在那了。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">💪</div>
-                    <h3>保护队友</h3>
-                    <p>帮队友建立优势，扩大团队经济领先</p>
-                    <div class="card-detail">
-                        <p>打野不是只管自己刷，你要帮队友建立优势。比如射手被压了，你去抓一波让他喘口气；比如法师没线权，你去帮她清一波。帮队友就是帮自己，队友肥了，团战才好打。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">⚔️</div>
-                    <h3>入侵对面</h3>
-                    <p>打乱对面打野节奏，让他没法安稳发育</p>
-                    <div class="card-detail">
-                        <p>入侵野区是打野的高级技巧。如果你打得过对面打野，就可以去反他的野怪。比如对面蓝开了，你就去反他的红；或者你清完野区，顺路去对面野区看一眼，能反就反，不能反就骚扰。</p>
-                    </div>
+    <section id="core">
+        <div class="section-header fade-in">
+            <div class="section-number">01</div>
+            <h2 class="section-title">打野到底<span style="color: var(--accent);">该干嘛</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            打野是整个团队的节奏发动机，俗称"打野是爹"。你不是在刷野，你是在掌控整场比赛的走向。一个好的打野，能把队友从青铜带到王者；一个坑的打野，能把三个队友气到挂机。
+        </p>
+        <div class="card-grid">
+            <div class="card fade-in">
+                <div class="card-icon">🎯</div>
+                <h3>掌控节奏</h3>
+                <p>知道什么时候该刷野、什么时候该抓人、什么时候该开龙</p>
+                <div class="card-detail">
+                    <p>节奏是关键！不是刷完野区就没事了，你要带着队友搞事情。比如你刷完红区，看上路压线了，那就去抓一波；中路有线权，就去入侵野区。节奏在你手里，不是等队友喊你。</p>
                 </div>
             </div>
-            <div class="tip-box fade-in">
-                <h4>💡 打野的黄金法则</h4>
+            <div class="card fade-in">
+                <div class="card-icon">⚡</div>
+                <h3>带起节奏</h3>
+                <p>主动找机会，不是等机会来，是你去创造机会</p>
+                <div class="card-detail">
+                    <p>别等着队友喊"打野来抓人"，你要自己判断什么时候该抓。比如对面射手压线太深了，这就是机会；比如对面打野在下半野区，你就可以去上路搞事情。主动出击才能掌控比赛。</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🗺️</div>
+                <h3>地图意识</h3>
+                <p>时刻关注小地图，知道对面在哪，你才好安排行动</p>
+                <div class="card-detail">
+                    <p>小地图是打野的命根子！看到对面打野在中路冒头，说明他在上半野区；看到对面射手突然往后走，可能是有人来抓了。多看小地图，才能预判对手的动向，先发制人。</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🐉</div>
+                <h3>控龙大师</h3>
+                <p>龙是节奏点，也是经济来源，打野必须会控龙</p>
+                <div class="card-detail">
+                    <p>龙坑是大节奏！不管是主宰还是暴君，打野都要把握好时机。最好是在推完线、队友都有时间的时候开龙。别一个人偷偷打，万一对面来抢，你可能就交代在那了。</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">💪</div>
+                <h3>保护队友</h3>
+                <p>帮队友建立优势，扩大团队经济领先</p>
+                <div class="card-detail">
+                    <p>打野不是只管自己刷，你要帮队友建立优势。比如射手被压了，你去抓一波让他喘口气；比如法师没线权，你去帮她清一波。帮队友就是帮自己，队友肥了，团战才好打。</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">⚔️</div>
+                <h3>入侵对面</h3>
+                <p>打乱对面打野节奏，让他没法安稳发育</p>
+                <div class="card-detail">
+                    <p>入侵野区是打野的高级技巧。如果你打得过对面打野，就可以去反他的野怪。比如对面蓝开了，你就去反他的红；或者你清完野区，顺路去对面野区看一眼，能反就反，不能反就骚扰。</p>
+                </div>
+            </div>
+        </div>
+        <div class="tip-box fade-in">
+            <h4>💡 打野的黄金法则</h4>
+            <ul>
+                <li>节奏比刷野重要，别光顾着刷，忘了搞事情</li>
+                <li>帮优不帮劣，优先帮优势路扩大优势</li>
+                <li>多看小地图，少死，多支援</li>
+                <li>控龙是大事，别忘了在关键时间点拿龙</li>
+                <li>心态要稳，被反抓了也别崩，继续找机会</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section-alt" id="opening">
+        <div class="section-header fade-in">
+            <div class="section-number">02</div>
+            <h2 class="section-title">开局<span style="color: var(--accent);">刷野路线</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            开局的前30秒决定你这局的走向。选对刷野路线，能让你快速到4级，还能顺便搞事情；选错了，可能前期就崩了。
+        </p>
+        <div class="timeline fade-in">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3 class="timeline-title">红开路线</h3>
+                <p class="timeline-desc">
+                    <strong>路线：</strong>红buff → 三熊 → 蓝buff → 河道蟹 → 到4级<br><br>
+                    <strong>适合英雄：</strong>需要攻速的打野，比如刘备、雅典娜、娜可露露<br><br>
+                    <strong>优点：</strong>红buff提供减速和灼烧，刷野快，到4级后抓下路成功率极高<br><br>
+                    <strong>注意：</strong>红开意味着你4级的时候上半野区还没刷，如果对面入侵上单，你支援会比较慢
+                </p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3 class="timeline-title">蓝开路线</h3>
+                <p class="timeline-desc">
+                    <strong>路线：</strong>蓝buff → 三狼 → 红buff → 河道蟹 → 到4级<br><br>
+                    <strong>适合英雄：</strong>需要冷却的打野，比如娜可露露、赵云、暃<br><br>
+                    <strong>优点：</strong>蓝buff提供冷却缩减，让你技能CD更快，前期战斗力更强<br><br>
+                    <strong>注意：</strong>蓝开到4后通常抓上路或中路，看哪边更好抓
+                </p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3 class="timeline-title">速3路线</h3>
+                <p class="timeline-desc">
+                    <strong>路线：</strong>buff → 小野 → 另一个buff，快速到3级<br><br>
+                    <strong>适合英雄：</strong>前期强势的打野，比如裴擒虎、云中君、橘右京<br><br>
+                    <strong>优点：</strong>3级就去搞事，不给对面打野发育时间，打他一个措手不及<br><br>
+                    <strong>注意：</strong>风险较高，如果搞事失败，发育会落后很多
+                </p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <h3 class="timeline-title">反野路线</h3>
+                <p class="timeline-desc">
+                    <strong>路线：</strong>开局直接去对面野区偷buff，或者配合辅助反野<br><br>
+                    <strong>适合英雄：</strong>前期伤害高的打野，比如裴擒虎、云中君<br><br>
+                    <strong>优点：</strong>打乱对面打野节奏，还能蹭蹭对面经济<br><br>
+                    <strong>注意：</strong>需要看队友配合，单独去反野很容易被包
+                </p>
+            </div>
+        </div>
+        <div class="case-study fade-in">
+            <h4>🎯 开局怎么选路线</h4>
+            <div class="flow-diagram">
+                <div class="flow-box">看对面阵容</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-box">判断对面打野位置</div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-box">决定刷野路线</div>
+                <br><br>
+                <div class="flow-box" style="background: var(--green-light); border-color: var(--green);">对面打野弱势 → 红开速4抓人</div>
+                <span class="flow-arrow">或</span>
+                <div class="flow-box" style="background: var(--blue-light); border-color: var(--blue);">需要冷却 → 蓝开速4</div>
+                <span class="flow-arrow">或</span>
+                <div class="flow-box" style="background: var(--gold-light); border-color: var(--gold);">前期强势 → 速3入侵</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="types">
+        <div class="section-header fade-in">
+            <div class="section-number">03</div>
+            <h2 class="section-title">打野<span style="color: var(--accent);">类型</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            不同的打野有不同的玩法，找到适合自己的类型很重要。有的打野需要吃全队经济，有的打野让经济给队友也能赢。
+        </p>
+        <div class="path-grid">
+            <div class="path-card fade-in hero-type">
+                <div class="card-icon">⚔️</div>
+                <h3>野核型打野</h3>
+                <p><strong>代表英雄：</strong>澜、镜、暃、娜可露露、李白</p>
+                <div class="card-detail" style="margin-top: 1rem;">
+                    <p><strong>特点：</strong>吃全队经济，需要大量资源才能打出伤害，后期carry能力极强</p>
+                    <p style="margin-top: 0.5rem;"><strong>玩法：</strong>前期蹭线发育，4级后开始抓人，中后期接管比赛，一打五不是梦</p>
+                    <p style="margin-top: 0.5rem;"><strong>适合：</strong>喜欢carry、想秀操作的玩家</p>
+                </div>
+                <div class="card-tags" style="margin-top: 1rem;">
+                    <span class="tag tag-jungle">核心</span>
+                    <span class="tag tag-jungle">吃经济</span>
+                    <span class="tag tag-jungle">carry</span>
+                </div>
+            </div>
+            <div class="path-card fade-in" style="animation-delay: 0.1s;">
+                <div class="card-icon">🛡️</div>
+                <h3>蓝领型打野</h3>
+                <p><strong>代表英雄：</strong>赵云、猪八戒、曹操、铠</p>
+                <div class="card-detail" style="margin-top: 1rem;">
+                    <p><strong>特点：</strong>不需要太多经济，技能机制优秀，让经济给队友也能发挥作用</p>
+                    <p style="margin-top: 0.5rem;"><strong>玩法：</strong>前期帮队友建立优势，中期开团抗伤害，后期保护队友输出</p>
+                    <p style="margin-top: 0.5rem;"><strong>适合：</strong>团队配合型、愿意为队友付出的玩家</p>
+                </div>
+                <div class="card-tags" style="margin-top: 1rem;">
+                    <span class="tag tag-jungle">团队</span>
+                    <span class="tag tag-jungle">抗伤害</span>
+                    <span class="tag tag-jungle">蓝领</span>
+                </div>
+            </div>
+            <div class="path-card fade-in" style="animation-delay: 0.2s;">
+                <div class="card-icon">⚡</div>
+                <h3>节奏型打野</h3>
+                <p><strong>代表英雄：</strong>兰陵王、阿轲、云中君、裴擒虎</p>
+                <div class="card-detail" style="margin-top: 1rem;">
+                    <p><strong>特点：</strong>前期伤害爆表，不断搞事入侵，带起全场节奏</p>
+                    <p style="margin-top: 0.5rem;"><strong>玩法：</strong>速3入侵，不给对面打野喘息机会，从头压制到尾</p>
+                    <p style="margin-top: 0.5rem;"><strong>适合：</strong>激进打法、喜欢打架、不喜欢刷野的玩家</p>
+                </div>
+                <div class="card-tags" style="margin-top: 1rem;">
+                    <span class="tag tag-jungle">节奏</span>
+                    <span class="tag tag-jungle">入侵</span>
+                    <span class="tag tag-jungle">压制</span>
+                </div>
+            </div>
+            <div class="path-card fade-in" style="animation-delay: 0.3s;">
+                <div class="card-icon">👑</div>
+                <h3>刺客型打野</h3>
+                <p><strong>代表英雄：</strong>韩信、百里玄策、孙悟空</p>
+                <div class="card-detail" style="margin-top: 1rem;">
+                    <p><strong>特点：</strong>高机动性，切后排能力强，但是比较脆，容易蒸发</p>
+                    <p style="margin-top: 0.5rem;"><strong>玩法：</strong>绕后切脆皮，打完就跑，不和前排纠缠</p>
+                    <p style="margin-top: 0.5rem;"><strong>适合：</strong>操作熟练、喜欢切后排的玩家</p>
+                </div>
+                <div class="card-tags" style="margin-top: 1rem;">
+                    <span class="tag tag-jungle">刺客</span>
+                    <span class="tag tag-jungle">切后</span>
+                    <span class="tag tag-jungle">灵活</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-alt" id="timing">
+        <div class="section-header fade-in">
+            <div class="section-number">04</div>
+            <h2 class="section-title">什么时候<span style="color: var(--accent);">该做什么</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            不同时间点有不同的重点，打野要跟着时间走。什么时候该刷野、什么时候该抓人、什么时候该控龙，都有讲究。
+        </p>
+        <div class="progress-section">
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">1️⃣</div>
+                <div class="progress-content">
+                    <h4>1-4分钟：发育期</h4>
+                    <p>快速到4级是第一要务！可以顺便抓人，但别耽误刷野节奏</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">刷野到4级</span>
+                        <span class="progress-tag">观察边路</span>
+                        <span class="progress-tag">准备首次抓人</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">2️⃣</div>
+                <div class="progress-content">
+                    <h4>4-8分钟：节奏期</h4>
+                    <p>到4级后开始搞事情！抓人、控龙、推塔，建立团队优势</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">优先抓人</span>
+                        <span class="progress-tag">控龙（4分钟首龙）</span>
+                        <span class="progress-tag">推塔推进</span>
+                        <span class="progress-tag">入侵野区</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">3️⃣</div>
+                <div class="progress-content">
+                    <h4>8-12分钟：团战期</h4>
+                    <p>团战多了，打野要找机会开团或者切后排，别一个人单机</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">配合开团</span>
+                        <span class="progress-tag">控大龙（10分钟）</span>
+                        <span class="progress-tag">推高地塔</span>
+                        <span class="progress-tag">保护队友</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">4️⃣</div>
+                <div class="progress-content">
+                    <h4>12分钟后：终结期</h4>
+                    <p>游戏后期，打野要么切后排，要么保护队友，一波结束比赛</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">切后排</span>
+                        <span class="progress-tag">保护C位</span>
+                        <span class="progress-tag">控龙</span>
+                        <span class="progress-tag">终结比赛</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="warning-box fade-in">
+            <h4>⚠️ 时间节点的注意事项</h4>
+            <ul>
+                <li><strong>4分钟：</strong>小龙刷新，是第一个大节奏点，提前控龙</li>
+                <li><strong>8分钟：</strong>先知主宰刷新，可以召唤小兵推塔</li>
+                <li><strong>10分钟：</strong>黑暗暴君+主宰同时刷新，要拿龙</li>
+                <li><strong>20分钟：</strong>风暴龙王刷新，拿了基本能赢</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="gank">
+        <div class="section-header fade-in">
+            <div class="section-number">05</div>
+            <h2 class="section-title">抓人<span style="color: var(--accent);">技巧</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            抓人是打野的基本功，但也是最考验意识的。一个好的抓人，能帮队友建立优势；一个错误的抓人，可能把自己也搭进去。
+        </p>
+        <div class="comparison fade-in">
+            <div class="comparison-card good">
+                <h3>✅ 好抓的情况</h3>
                 <ul>
-                    <li>节奏比刷野重要，别光顾着刷，忘了搞事情</li>
-                    <li>帮优不帮劣，优先帮优势路扩大优势</li>
-                    <li>多看小地图，少死，多支援</li>
-                    <li>控龙是大事，别忘了在关键时间点拿龙</li>
-                    <li>心态要稳，被反抓了也别崩，继续找机会</li>
+                    <li>✓ 对面压线太深，靠近我方防御塔</li>
+                    <li>✓ 对面没有闪现或其他保命技能</li>
+                    <li>✓ 我方队友有控制技能</li>
+                    <li>✓ 河道草丛有视野</li>
+                    <li>✓ 知道对面打野不在附近</li>
                 </ul>
             </div>
-        </section>
-
-        <section class="section-alt" id="opening">
-            <div class="section-header fade-in">
-                <div class="section-number">02</div>
-                <h2 class="section-title">开局<span style="color: var(--accent);">刷野路线</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                开局的前30秒决定你这局的走向。选对刷野路线，能让你快速到4级，还能顺便搞事情；选错了，可能前期就崩了。
-            </p>
-            <div class="timeline fade-in">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h3 class="timeline-title">红开路线</h3>
-                    <p class="timeline-desc">
-                        <strong>路线：</strong>红buff → 三熊 → 蓝buff → 河道蟹 → 到4级<br><br>
-                        <strong>适合英雄：</strong>需要攻速的打野，比如刘备、雅典娜、娜可露露<br><br>
-                        <strong>优点：</strong>红buff提供减速和灼烧，刷野快，到4级后抓下路成功率极高<br><br>
-                        <strong>注意：</strong>红开意味着你4级的时候上半野区还没刷，如果对面入侵上单，你支援会比较慢
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h3 class="timeline-title">蓝开路线</h3>
-                    <p class="timeline-desc">
-                        <strong>路线：</strong>蓝buff → 三狼 → 红buff → 河道蟹 → 到4级<br><br>
-                        <strong>适合英雄：</strong>需要冷却的打野，比如娜可露露、赵云、暃<br><br>
-                        <strong>优点：</strong>蓝buff提供冷却缩减，让你技能CD更快，前期战斗力更强<br><br>
-                        <strong>注意：</strong>蓝开到4后通常抓上路或中路，看哪边更好抓
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h3 class="timeline-title">速3路线</h3>
-                    <p class="timeline-desc">
-                        <strong>路线：</strong>buff → 小野 → 另一个buff，快速到3级<br><br>
-                        <strong>适合英雄：</strong>前期强势的打野，比如裴擒虎、云中君、橘右京<br><br>
-                        <strong>优点：</strong>3级就去搞事，不给对面打野发育时间，打他一个措手不及<br><br>
-                        <strong>注意：</strong>风险较高，如果搞事失败，发育会落后很多
-                    </p>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <h3 class="timeline-title">反野路线</h3>
-                    <p class="timeline-desc">
-                        <strong>路线：</strong>开局直接去对面野区偷buff，或者配合辅助反野<br><br>
-                        <strong>适合英雄：</strong>前期伤害高的打野，比如裴擒虎、云中君<br><br>
-                        <strong>优点：</strong>打乱对面打野节奏，还能蹭蹭对面经济<br><br>
-                        <strong>注意：</strong>需要看队友配合，单独去反野很容易被包
-                    </p>
-                </div>
-            </div>
-            <div class="case-study fade-in">
-                <h4>🎯 开局怎么选路线</h4>
-                <div class="flow-diagram">
-                    <div class="flow-box">看对面阵容</div>
-                    <span class="flow-arrow">→</span>
-                    <div class="flow-box">判断对面打野位置</div>
-                    <span class="flow-arrow">→</span>
-                    <div class="flow-box">决定刷野路线</div>
-                    <br><br>
-                    <div class="flow-box" style="background: var(--green-light); border-color: var(--green);">对面打野弱势 → 红开速4抓人</div>
-                    <span class="flow-arrow">或</span>
-                    <div class="flow-box" style="background: var(--blue-light); border-color: var(--blue);">需要冷却 → 蓝开速4</div>
-                    <span class="flow-arrow">或</span>
-                    <div class="flow-box" style="background: var(--gold-light); border-color: var(--gold);">前期强势 → 速3入侵</div>
-                </div>
-            </div>
-        </section>
-
-        <section id="types">
-            <div class="section-header fade-in">
-                <div class="section-number">03</div>
-                <h2 class="section-title">打野<span style="color: var(--accent);">类型</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                不同的打野有不同的玩法，找到适合自己的类型很重要。有的打野需要吃全队经济，有的打野让经济给队友也能赢。
-            </p>
-            <div class="path-grid">
-                <div class="path-card fade-in hero-type">
-                    <div class="card-icon">⚔️</div>
-                    <h3>野核型打野</h3>
-                    <p><strong>代表英雄：</strong>澜、镜、暃、娜可露露、李白</p>
-                    <div class="card-detail" style="margin-top: 1rem;">
-                        <p><strong>特点：</strong>吃全队经济，需要大量资源才能打出伤害，后期carry能力极强</p>
-                        <p style="margin-top: 0.5rem;"><strong>玩法：</strong>前期蹭线发育，4级后开始抓人，中后期接管比赛，一打五不是梦</p>
-                        <p style="margin-top: 0.5rem;"><strong>适合：</strong>喜欢carry、想秀操作的玩家</p>
-                    </div>
-                    <div class="card-tags" style="margin-top: 1rem;">
-                        <span class="tag tag-jungle">核心</span>
-                        <span class="tag tag-jungle">吃经济</span>
-                        <span class="tag tag-jungle">carry</span>
-                    </div>
-                </div>
-                <div class="path-card fade-in" style="animation-delay: 0.1s;">
-                    <div class="card-icon">🛡️</div>
-                    <h3>蓝领型打野</h3>
-                    <p><strong>代表英雄：</strong>赵云、猪八戒、曹操、铠</p>
-                    <div class="card-detail" style="margin-top: 1rem;">
-                        <p><strong>特点：</strong>不需要太多经济，技能机制优秀，让经济给队友也能发挥作用</p>
-                        <p style="margin-top: 0.5rem;"><strong>玩法：</strong>前期帮队友建立优势，中期开团抗伤害，后期保护队友输出</p>
-                        <p style="margin-top: 0.5rem;"><strong>适合：</strong>团队配合型、愿意为队友付出的玩家</p>
-                    </div>
-                    <div class="card-tags" style="margin-top: 1rem;">
-                        <span class="tag tag-jungle">团队</span>
-                        <span class="tag tag-jungle">抗伤害</span>
-                        <span class="tag tag-jungle">蓝领</span>
-                    </div>
-                </div>
-                <div class="path-card fade-in" style="animation-delay: 0.2s;">
-                    <div class="card-icon">⚡</div>
-                    <h3>节奏型打野</h3>
-                    <p><strong>代表英雄：</strong>兰陵王、阿轲、云中君、裴擒虎</p>
-                    <div class="card-detail" style="margin-top: 1rem;">
-                        <p><strong>特点：</strong>前期伤害爆表，不断搞事入侵，带起全场节奏</p>
-                        <p style="margin-top: 0.5rem;"><strong>玩法：</strong>速3入侵，不给对面打野喘息机会，从头压制到尾</p>
-                        <p style="margin-top: 0.5rem;"><strong>适合：</strong>激进打法、喜欢打架、不喜欢刷野的玩家</p>
-                    </div>
-                    <div class="card-tags" style="margin-top: 1rem;">
-                        <span class="tag tag-jungle">节奏</span>
-                        <span class="tag tag-jungle">入侵</span>
-                        <span class="tag tag-jungle">压制</span>
-                    </div>
-                </div>
-                <div class="path-card fade-in" style="animation-delay: 0.3s;">
-                    <div class="card-icon">👑</div>
-                    <h3>刺客型打野</h3>
-                    <p><strong>代表英雄：</strong>韩信、百里玄策、孙悟空</p>
-                    <div class="card-detail" style="margin-top: 1rem;">
-                        <p><strong>特点：</strong>高机动性，切后排能力强，但是比较脆，容易蒸发</p>
-                        <p style="margin-top: 0.5rem;"><strong>玩法：</strong>绕后切脆皮，打完就跑，不和前排纠缠</p>
-                        <p style="margin-top: 0.5rem;"><strong>适合：</strong>操作熟练、喜欢切后排的玩家</p>
-                    </div>
-                    <div class="card-tags" style="margin-top: 1rem;">
-                        <span class="tag tag-jungle">刺客</span>
-                        <span class="tag tag-jungle">切后</span>
-                        <span class="tag tag-jungle">灵活</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-alt" id="timing">
-            <div class="section-header fade-in">
-                <div class="section-number">04</div>
-                <h2 class="section-title">什么时候<span style="color: var(--accent);">该做什么</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                不同时间点有不同的重点，打野要跟着时间走。什么时候该刷野、什么时候该抓人、什么时候该控龙，都有讲究。
-            </p>
-            <div class="progress-section">
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">1️⃣</div>
-                    <div class="progress-content">
-                        <h4>1-4分钟：发育期</h4>
-                        <p>快速到4级是第一要务！可以顺便抓人，但别耽误刷野节奏</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">刷野到4级</span>
-                            <span class="progress-tag">观察边路</span>
-                            <span class="progress-tag">准备首次抓人</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">2️⃣</div>
-                    <div class="progress-content">
-                        <h4>4-8分钟：节奏期</h4>
-                        <p>到4级后开始搞事情！抓人、控龙、推塔，建立团队优势</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">优先抓人</span>
-                            <span class="progress-tag">控龙（4分钟首龙）</span>
-                            <span class="progress-tag">推塔推进</span>
-                            <span class="progress-tag">入侵野区</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">3️⃣</div>
-                    <div class="progress-content">
-                        <h4>8-12分钟：团战期</h4>
-                        <p>团战多了，打野要找机会开团或者切后排，别一个人单机</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">配合开团</span>
-                            <span class="progress-tag">控大龙（10分钟）</span>
-                            <span class="progress-tag">推高地塔</span>
-                            <span class="progress-tag">保护队友</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">4️⃣</div>
-                    <div class="progress-content">
-                        <h4>12分钟后：终结期</h4>
-                        <p>游戏后期，打野要么切后排，要么保护队友，一波结束比赛</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">切后排</span>
-                            <span class="progress-tag">保护C位</span>
-                            <span class="progress-tag">控龙</span>
-                            <span class="progress-tag">终结比赛</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="warning-box fade-in">
-                <h4>⚠️ 时间节点的注意事项</h4>
+            <div class="comparison-card bad">
+                <h3>❌ 不好抓的情况</h3>
                 <ul>
-                    <li><strong>4分钟：</strong>小龙刷新，是第一个大节奏点，提前控龙</li>
-                    <li><strong>8分钟：</strong>先知主宰刷新，可以召唤小兵推塔</li>
-                    <li><strong>10分钟：</strong>黑暗暴君+主宰同时刷新，要拿龙</li>
-                    <li><strong>20分钟：</strong>风暴龙王刷新，拿了基本能赢</li>
+                    <li>✗ 对面防御塔下，太深了</li>
+                    <li>✗ 对面有闪现、净化等保命技能</li>
+                    <li>✗ 我方队友没控制技能</li>
+                    <li>✗ 不确定对面打野位置</li>
+                    <li>✗ 对面兵线还没过来</li>
                 </ul>
             </div>
-        </section>
+        </div>
+        <div class="tip-box fade-in">
+            <h4>🎯 抓人的正确流程</h4>
+            <ul>
+                <li><strong>1. 判断时机：</strong>先确认这波兵线是否有利于抓人，对面是否压线</li>
+                <li><strong>2. 选择路线：</strong>从河道走比从塔后绕更快，但要注意是否被视野看到</li>
+                <li><strong>3. 等技能：</strong>等自家队友先交控制技能，你再补伤害</li>
+                <li><strong>4. 留技能：</strong>抓完人别急着走，看看能不能反蹲或者拿龙</li>
+                <li><strong>5. 推塔：</strong>抓死人后赶紧推塔，这是最重要的</li>
+            </ul>
+        </div>
+        <div class="case-study fade-in">
+            <h4>🎮 抓人实战案例</h4>
+            <div class="scenario">
+                <strong>场景：</strong>你玩娜可露露，4级了，下路鲁班和对面黄忠对线，兵线刚好推到对面塔下
+            </div>
+            <p><span class="action">分析：</span></p>
+            <p>• 对面黄忠在塔下，位置靠前 ✓</p>
+            <p>• 兵线进塔，黄忠需要清兵 ✓</p>
+            <p>• 鲁班有控制技能 ✓</p>
+            <p>• 对面打野在中路出现了 ✓</p>
+            <p style="margin-top: 0.5rem;"><span class="action">正确操作：</span>从河道草丛绕过去，等鲁班先用一技能把黄忠弹开，然后你大招飞过去一套秒掉。击杀后推塔拿龙。</p>
+        </div>
+    </section>
 
-        <section id="gank">
-            <div class="section-header fade-in">
-                <div class="section-number">05</div>
-                <h2 class="section-title">抓人<span style="color: var(--accent);">技巧</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                抓人是打野的基本功，但也是最考验意识的。一个好的抓人，能帮队友建立优势；一个错误的抓人，可能把自己也搭进去。
-            </p>
-            <div class="comparison fade-in">
-                <div class="comparison-card good">
-                    <h3>✅ 好抓的情况</h3>
-                    <ul>
-                        <li>✓ 对面压线太深，靠近我方防御塔</li>
-                        <li>✓ 对面没有闪现或其他保命技能</li>
-                        <li>✓ 我方队友有控制技能</li>
-                        <li>✓ 河道草丛有视野</li>
-                        <li>✓ 知道对面打野不在附近</li>
-                    </ul>
-                </div>
-                <div class="comparison-card bad">
-                    <h3>❌ 不好抓的情况</h3>
-                    <ul>
-                        <li>✗ 对面防御塔下，太深了</li>
-                        <li>✗ 对面有闪现、净化等保命技能</li>
-                        <li>✗ 我方队友没控制技能</li>
-                        <li>✗ 不确定对面打野位置</li>
-                        <li>✗ 对面兵线还没过来</li>
-                    </ul>
+    <section class="section-alt" id="dragon">
+        <div class="section-header fade-in">
+            <div class="section-number">06</div>
+            <h2 class="section-title">控龙<span style="color: var(--accent);">技巧</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            龙是节奏点，也是资源点。控龙做得好，能让团队经济领先；控龙做不好，可能被对面翻盘。
+        </p>
+        <div class="card-grid">
+            <div class="card fade-in">
+                <div class="card-icon">🐲</div>
+                <h3>小龙的用处</h3>
+                <p>4分钟刷新，增加全队经验金币，优势方必拿</p>
+                <div class="card-detail">
+                    <p>小龙最主要的是经验！拿了小龙，全队都能到4级，团战优势巨大。所以4分钟的小龙一定要争，如果打不过，也要骚扰对面打龙，拖延时间。</p>
                 </div>
             </div>
-            <div class="tip-box fade-in">
-                <h4>🎯 抓人的正确流程</h4>
-                <ul>
-                    <li><strong>1. 判断时机：</strong>先确认这波兵线是否有利于抓人，对面是否压线</li>
-                    <li><strong>2. 选择路线：</strong>从河道走比从塔后绕更快，但要注意是否被视野看到</li>
-                    <li><strong>3. 等技能：</strong>等自家队友先交控制技能，你再补伤害</li>
-                    <li><strong>4. 留技能：</strong>抓完人别急着走，看看能不能反蹲或者拿龙</li>
-                    <li><strong>5. 推塔：</strong>抓死人后赶紧推塔，这是最重要的</li>
-                </ul>
-            </div>
-            <div class="case-study fade-in">
-                <h4>🎮 抓人实战案例</h4>
-                <div class="scenario">
-                    <strong>场景：</strong>你玩娜可露露，4级了，下路鲁班和对面黄忠对线，兵线刚好推到对面塔下
+            <div class="card fade-in">
+                <div class="card-icon">👹</div>
+                <h3>先知主宰</h3>
+                <p>8分钟刷新，击杀后召唤小兵，帮助推塔</p>
+                <div class="card-detail">
+                    <p>先知主宰主要是推塔用的。拿了之后会不断召唤小兵推线，特别适合优势方滚雪球。如果你们在推塔节奏上，拿了先知主宰能让对面难以防守。</p>
                 </div>
-                <p><span class="action">分析：</span></p>
-                <p>• 对面黄忠在塔下，位置靠前 ✓</p>
-                <p>• 兵线进塔，黄忠需要清兵 ✓</p>
-                <p>• 鲁班有控制技能 ✓</p>
-                <p>• 对面打野在中路出现了 ✓</p>
-                <p style="margin-top: 0.5rem;"><span class="action">正确操作：</span>从河道草丛绕过去，等鲁班先用一技能把黄忠弹开，然后你大招飞过去一套秒掉。击杀后推塔拿龙。</p>
             </div>
-        </section>
+            <div class="card fade-in">
+                <div class="card-icon">🐉</div>
+                <h3>黑暗暴君</h3>
+                <p>10分钟后刷新，增加全队物理/法术攻击</p>
+                <div class="card-detail">
+                    <p>暴君加的是输出！拿了暴君，全队伤害提升，团战更容易赢。特别是在推高地的时候，拿了暴君能快速拔塔。</p>
+                </div>
+            </div>
+            <div class="card fade-in">
+                <div class="card-icon">🐍</div>
+                <h3>风暴龙王</h3>
+                <p>20分钟后刷新，击杀后获得超强力护盾和真实伤害</p>
+                <div class="card-detail">
+                    <p>风暴龙王是终结比赛的利器！拿了龙王，全队获得护盾和真实伤害buff，可以强行推塔或者打团。这个龙一定要争，没拿到基本就输了一半。</p>
+                </div>
+            </div>
+        </div>
+        <div class="tip-box fade-in">
+            <h4>💡 什么时候打龙</h4>
+            <ul>
+                <li>推完线，队友都有空的时候</li>
+                <li>击杀对面打野后，赶紧拿龙</li>
+                <li>对面人员分散，难以争夺的时候</li>
+                <li>做好视野，确认对面不在附近</li>
+                <li>别一个人偷偷打龙，万一被抢了还可能被反杀</li>
+            </ul>
+        </div>
+        <div class="warning-box fade-in">
+            <h4>⚠️ 打龙要注意</h4>
+            <ul>
+                <li>打龙前一定要做好视野！被对面抢龙加团灭是经典翻盘方式</li>
+                <li>如果对面来人抢龙，果断放弃，别为了龙把自己搭进去</li>
+                <li>风暴龙王一定要打，但是要注意队友位置，别脱节</li>
+            </ul>
+        </div>
+    </section>
 
-        <section class="section-alt" id="dragon">
-            <div class="section-header fade-in">
-                <div class="section-number">06</div>
-                <h2 class="section-title">控龙<span style="color: var(--accent);">技巧</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                龙是节奏点，也是资源点。控龙做得好，能让团队经济领先；控龙做不好，可能被对面翻盘。
-            </p>
-            <div class="card-grid">
-                <div class="card fade-in">
-                    <div class="card-icon">🐲</div>
-                    <h3>小龙的用处</h3>
-                    <p>4分钟刷新，增加全队经验金币，优势方必拿</p>
-                    <div class="card-detail">
-                        <p>小龙最主要的是经验！拿了小龙，全队都能到4级，团战优势巨大。所以4分钟的小龙一定要争，如果打不过，也要骚扰对面打龙，拖延时间。</p>
-                    </div>
+    <section id="mistakes">
+        <div class="section-header fade-in">
+            <div class="section-number">07</div>
+            <h2 class="section-title">常见<span style="color: var(--accent);">错误</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            这些错误打野经常犯，犯了轻则崩盘，重则被队友骂到挂机。避开这些坑，你至少是个合格打野。
+        </p>
+        <div class="mistakes-list">
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 只刷野不抓人</p>
+                    <p class="mistake-explain">刷完野区就走，队友被抓也不管，节奏全丢</p>
                 </div>
-                <div class="card fade-in">
-                    <div class="card-icon">👹</div>
-                    <h3>先知主宰</h3>
-                    <p>8分钟刷新，击杀后召唤小兵，帮助推塔</p>
-                    <div class="card-detail">
-                        <p>先知主宰主要是推塔用的。拿了之后会不断召唤小兵推线，特别适合优势方滚雪球。如果你们在推塔节奏上，拿了先知主宰能让对面难以防守。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">🐉</div>
-                    <h3>黑暗暴君</h3>
-                    <p>10分钟后刷新，增加全队物理/法术攻击</p>
-                    <div class="card-detail">
-                        <p>暴君加的是输出！拿了暴君，全队伤害提升，团战更容易赢。特别是在推高地的时候，拿了暴君能快速拔塔。</p>
-                    </div>
-                </div>
-                <div class="card fade-in">
-                    <div class="card-icon">🐍</div>
-                    <h3>风暴龙王</h3>
-                    <p>20分钟后刷新，击杀后获得超强力护盾和真实伤害</p>
-                    <div class="card-detail">
-                        <p>风暴龙王是终结比赛的利器！拿了龙王，全队获得护盾和真实伤害buff，可以强行推塔或者打团。这个龙一定要争，没拿到基本就输了一半。</p>
-                    </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 刷完野区主动找机会</p>
+                    <p class="fix-detail">顺路看看边路有没有机会抓人，或者去反蹲</p>
                 </div>
             </div>
-            <div class="tip-box fade-in">
-                <h4>💡 什么时候打龙</h4>
-                <ul>
-                    <li>推完线，队友都有空的时候</li>
-                    <li>击杀对面打野后，赶紧拿龙</li>
-                    <li>对面人员分散，难以争夺的时候</li>
-                    <li>做好视野，确认对面不在附近</li>
-                    <li>别一个人偷偷打龙，万一被抢了还可能被反杀</li>
-                </ul>
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 无脑入侵被反杀</p>
+                    <p class="mistake-explain">不看队友位置，一个人冲到对面野区送</p>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 入侵前确认队友能支援</p>
+                    <p class="fix-detail">入侵是配合的事情，最好有辅助跟着</p>
+                </div>
             </div>
-            <div class="warning-box fade-in">
-                <h4>⚠️ 打龙要注意</h4>
-                <ul>
-                    <li>打龙前一定要做好视野！被对面抢龙加团灭是经典翻盘方式</li>
-                    <li>如果对面来人抢龙，果断放弃，别为了龙把自己搭进去</li>
-                    <li>风暴龙王一定要打，但是要注意队友位置，别脱节</li>
-                </ul>
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 不控龙</p>
+                    <p class="mistake-explain">龙刷了完全不管，白白给对面</p>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 主动控龙控资源</p>
+                    <p class="fix-detail">设置时间提醒自己龙刷新了，提前准备</p>
+                </div>
             </div>
-        </section>
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 经济落后还抢队友线</p>
+                    <p class="mistake-explain">自己崩了还吃队友经济，让队友更难受</p>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 蹭线但不抢线</p>
+                    <p class="fix-detail">蹭线一起吃可以，但别一个人把线全吃了</p>
+                </div>
+            </div>
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 不看小地图被抓</p>
+                    <p class="mistake-explain">不知道对面打野在哪，自己被抓了无数次</p>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 多看小地图预判敌人动向</p>
+                    <p class="fix-detail">养成习惯，每5秒扫一眼小地图</p>
+                </div>
+            </div>
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 抓人失败不撤退</p>
+                    <p class="mistake-explain">抓人没抓到还继续追，结果被反杀</p>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 抓不到就撤，别贪</p>
+                    <p class="fix-detail">抓人失败赶紧回去刷野或者控龙，别追到塔下</p>
+                </div>
+            </div>
+            <div class="mistake-item fade-in">
+                <div class="mistake-text">
+                    <p>❌ 团战不切后排</p>
+                    <p class="mistake-explain">团战和对面前排纠缠，完全不管对面脆皮</p>
+                </div>
+                <div class="mistake-arrow">→</div>
+                <div class="fix-text">
+                    <p>✅ 绕后切对面脆皮</p>
+                    <p class="fix-detail">作为打野，你的任务是击杀对面后排</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section id="mistakes">
-            <div class="section-header fade-in">
-                <div class="section-number">07</div>
-                <h2 class="section-title">常见<span style="color: var(--accent);">错误</span></h2>
-            </div>
-            <p class="section-intro fade-in">
-                这些错误打野经常犯，犯了轻则崩盘，重则被队友骂到挂机。避开这些坑，你至少是个合格打野。
-            </p>
-            <div class="mistakes-list">
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 只刷野不抓人</p>
-                        <p class="mistake-explain">刷完野区就走，队友被抓也不管，节奏全丢</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 刷完野区主动找机会</p>
-                        <p class="fix-detail">顺路看看边路有没有机会抓人，或者去反蹲</p>
-                    </div>
-                </div>
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 无脑入侵被反杀</p>
-                        <p class="mistake-explain">不看队友位置，一个人冲到对面野区送</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 入侵前确认队友能支援</p>
-                        <p class="fix-detail">入侵是配合的事情，最好有辅助跟着</p>
-                    </div>
-                </div>
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 不控龙</p>
-                        <p class="mistake-explain">龙刷了完全不管，白白给对面</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 主动控龙控资源</p>
-                        <p class="fix-detail">设置时间提醒自己龙刷新了，提前准备</p>
-                    </div>
-                </div>
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 经济落后还抢队友线</p>
-                        <p class="mistake-explain">自己崩了还吃队友经济，让队友更难受</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 蹭线但不抢线</p>
-                        <p class="fix-detail">蹭线一起吃可以，但别一个人把线全吃了</p>
-                    </div>
-                </div>
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 不看小地图被抓</p>
-                        <p class="mistake-explain">不知道对面打野在哪，自己被抓了无数次</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 多看小地图预判敌人动向</p>
-                        <p class="fix-detail">养成习惯，每5秒扫一眼小地图</p>
-                    </div>
-                </div>
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 抓人失败不撤退</p>
-                        <p class="mistake-explain">抓人没抓到还继续追，结果被反杀</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 抓不到就撤，别贪</p>
-                        <p class="fix-detail">抓人失败赶紧回去刷野或者控龙，别追到塔下</p>
-                    </div>
-                </div>
-                <div class="mistake-item fade-in">
-                    <div class="mistake-text">
-                        <p>❌ 团战不切后排</p>
-                        <p class="mistake-explain">团战和对面前排纠缠，完全不管对面脆皮</p>
-                    </div>
-                    <div class="mistake-arrow">→</div>
-                    <div class="fix-text">
-                        <p>✅ 绕后切对面脆皮</p>
-                        <p class="fix-detail">作为打野，你的任务是击杀对面后排</p>
+    <section class="section-alt" id="growth">
+        <div class="section-header fade-in">
+            <div class="section-number">08</div>
+            <h2 class="section-title">打野<span style="color: var(--accent);">成长之路</span></h2>
+        </div>
+        <p class="section-intro fade-in">
+            成为野王不是一朝一夕的事情，需要不断练习和总结。下面是一个打野的成长路线。
+        </p>
+        <div class="progress-section">
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">🥉</div>
+                <div class="progress-content">
+                    <h4>入门阶段</h4>
+                    <p>掌握基础刷野路线和抓人时机</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">熟练1-2个打野英雄</span>
+                        <span class="progress-tag">学会基本刷野路线</span>
+                        <span class="progress-tag">知道什么时候该抓人</span>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">🥈</div>
+                <div class="progress-content">
+                    <h4>进阶阶段</h4>
+                    <p>学会控龙、配合队友、预判对手</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">学会控龙时机</span>
+                        <span class="progress-tag">配合队友打团</span>
+                        <span class="progress-tag">预判对面打野位置</span>
+                        <span class="progress-tag">入侵对面野区</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">🥇</div>
+                <div class="progress-content">
+                    <h4>高手阶段</h4>
+                    <p>掌控全场节奏，带动全队</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">掌控全场节奏</span>
+                        <span class="progress-tag">指挥团队作战</span>
+                        <span class="progress-tag">多位置英雄池</span>
+                        <span class="progress-tag">心理素质稳定</span>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-stage fade-in">
+                <div class="progress-icon">👑</div>
+                <div class="progress-content">
+                    <h4>野王阶段</h4>
+                    <p>一打五carry全场，带动队友</p>
+                    <div class="progress-tags">
+                        <span class="progress-tag">高水平carry能力</span>
+                        <span class="progress-tag">逆风翻盘能力</span>
+                        <span class="progress-tag">带动队友发挥</span>
+                        <span class="progress-tag">全能英雄池</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <section class="section-alt" id="growth">
-            <div class="section-header fade-in">
-                <div class="section-number">08</div>
-                <h2 class="section-title">打野<span style="color: var(--accent);">成长之路</span></h2>
+    <section id="summary">
+        <div class="section-header fade-in">
+            <div class="section-number">09</div>
+            <h2 class="section-title">总结</h2>
+        </div>
+        <div class="summary-grid fade-in">
+            <div class="summary-item">
+                <div class="summary-icon">🎯</div>
+                <p class="summary-text">打野是<span class="highlight">团队的节奏发动机</span></p>
             </div>
-            <p class="section-intro fade-in">
-                成为野王不是一朝一夕的事情，需要不断练习和总结。下面是一个打野的成长路线。
-            </p>
-            <div class="progress-section">
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">🥉</div>
-                    <div class="progress-content">
-                        <h4>入门阶段</h4>
-                        <p>掌握基础刷野路线和抓人时机</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">熟练1-2个打野英雄</span>
-                            <span class="progress-tag">学会基本刷野路线</span>
-                            <span class="progress-tag">知道什么时候该抓人</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">🥈</div>
-                    <div class="progress-content">
-                        <h4>进阶阶段</h4>
-                        <p>学会控龙、配合队友、预判对手</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">学会控龙时机</span>
-                            <span class="progress-tag">配合队友打团</span>
-                            <span class="progress-tag">预判对面打野位置</span>
-                            <span class="progress-tag">入侵对面野区</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">🥇</div>
-                    <div class="progress-content">
-                        <h4>高手阶段</h4>
-                        <p>掌控全场节奏，带动全队</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">掌控全场节奏</span>
-                            <span class="progress-tag">指挥团队作战</span>
-                            <span class="progress-tag">多位置英雄池</span>
-                            <span class="progress-tag">心理素质稳定</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="progress-stage fade-in">
-                    <div class="progress-icon">👑</div>
-                    <div class="progress-content">
-                        <h4>野王阶段</h4>
-                        <p>一打五carry全场，带动队友</p>
-                        <div class="progress-tags">
-                            <span class="progress-tag">高水平carry能力</span>
-                            <span class="progress-tag">逆风翻盘能力</span>
-                            <span class="progress-tag">带动队友发挥</span>
-                            <span class="progress-tag">全能英雄池</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="summary-item">
+                <div class="summary-icon">⚡</div>
+                <p class="summary-text">节奏比刷野<span class="highlight">更重要</span></p>
             </div>
-        </section>
-
-        <section id="summary">
-            <div class="section-header fade-in">
-                <div class="section-number">09</div>
-                <h2 class="section-title">总结</h2>
+            <div class="summary-item">
+                <div class="summary-icon">🗺️</div>
+                <p class="summary-text">多看小地图<span class="highlight">少死多支援</span></p>
             </div>
-            <div class="summary-grid fade-in">
-                <div class="summary-item">
-                    <div class="summary-icon">🎯</div>
-                    <p class="summary-text">打野是<span class="highlight">团队的节奏发动机</span></p>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-icon">⚡</div>
-                    <p class="summary-text">节奏比刷野<span class="highlight">更重要</span></p>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-icon">🗺️</div>
-                    <p class="summary-text">多看小地图<span class="highlight">少死多支援</span></p>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-icon">🐉</div>
-                    <p class="summary-text">控龙是<span class="highlight">关键节奏点</span></p>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-icon">💪</div>
-                    <p class="summary-text">帮优不帮劣<span class="highlight">扩大优势</span></p>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-icon">⚔️</div>
-                    <p class="summary-text">稳定心态<span class="highlight">carry全场</span></p>
-                </div>
+            <div class="summary-item">
+                <div class="summary-icon">🐉</div>
+                <p class="summary-text">控龙是<span class="highlight">关键节奏点</span></p>
             </div>
-            <div class="tip-box fade-in" style="margin-top: 3rem;">
-                <h4>💡 最后的话</h4>
-                <ul>
-                    <li>打野是最能影响比赛结果的位置，但也责任最大</li>
-                    <li>被队友骂是正常的，别往心里去，专注自己的操作</li>
-                    <li>多看小地图、多总结经验、野王指日可待</li>
-                    <li>最重要的是：享受游戏，开心最重要！</li>
-                </ul>
+            <div class="summary-item">
+                <div class="summary-icon">💪</div>
+                <p class="summary-text">帮优不帮劣<span class="highlight">扩大优势</span></p>
             </div>
-        </section>
+            <div class="summary-item">
+                <div class="summary-icon">⚔️</div>
+                <p class="summary-text">稳定心态<span class="highlight">carry全场</span></p>
+            </div>
+        </div>
+        <div class="tip-box fade-in" style="margin-top: 3rem;">
+            <h4>💡 最后的话</h4>
+            <ul>
+                <li>打野是最能影响比赛结果的位置，但也责任最大</li>
+                <li>被队友骂是正常的，别往心里去，专注自己的操作</li>
+                <li>多看小地图、多总结经验、野王指日可待</li>
+                <li>最重要的是：享受游戏，开心最重要！</li>
+            </ul>
+        </div>
+    </section>
     </main>
 
     <footer>
-        <p class="highlight">祝大家早日上分顺利！🎮</p>
-        <p style="margin-top: 1rem;">王者荣耀打野教学 · @归橘落</p>
-        <div style="margin-top: 2rem;">
-            <a href="index.html" class="btn btn-secondary" style="text-decoration: none; display: inline-flex;">← 返回作品集</a>
-        </div>
+    <p class="highlight">祝大家早日上分顺利！🎮</p>
+    <p style="margin-top: 1rem;">王者荣耀打野教学 · @归橘落</p>
+    <div style="margin-top: 2rem;">
+        <a href="index.html" class="btn btn-secondary" style="text-decoration: none; display: inline-flex;">← 返回作品集</a>
+    </div>
     </footer>
 
-    <button class="back-to-top" id="backToTop" aria-label="回到顶部">↑</button>
+    <button class="back-to-top back-jungle" id="backToTop" aria-label="回到顶部">↑</button>
 
-    <script>
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1 });
+    <script src="js/script.js"></script>
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        let lastScroll = 0;
-        const nav = document.querySelector('nav');
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-            }
-            
-            if (currentScroll > 100) {
-                nav.classList.add('scrolled');
-                backToTop.classList.add('visible');
-            } else {
-                nav.classList.remove('scrolled');
-                backToTop.classList.remove('visible');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
 </body>
 </html>
